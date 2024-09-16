@@ -1,0 +1,20 @@
+{
+  "name": "CollegeQuest",
+  "short_name": "CollegeQuest",
+  "start_url": "/docs/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ebf8ff",
+  "icons": [
+    {
+      "src": "/docs/images/logob.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/docs/images/logob.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
