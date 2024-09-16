@@ -5,7 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CollegeQuest</title>
   <link rel="stylesheet" href="style.css">
-  
+  <link rel="manifest" href="/docs/manifest.json">
+  <meta name="theme-color" content="#ebf8ff">
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/docs/service-worker.js")
+        .then((registration) => {
+          console.log("ServiceWorker registered with scope: ", registration.scope);
+        })
+        .catch((error) => {
+          console.log("ServiceWorker registration failed: ", error);
+        });
+    }
+  </script>
 </head>
 <style>
   html {
