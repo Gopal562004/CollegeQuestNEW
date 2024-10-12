@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CollegeQuest</title>
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<style>
+  html {
+  scroll-behavior: smooth;
+  width: 100%;
+  
+}
+    .search-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      transition: all 0.5s ease;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-container.open {
+      transform: translate(-50%, -50%) scale(1);
+      width: 50vw; /* Adjust to fit a large portion of the screen */
+      height: 90vh; /* Adjust to fit a large portion of the screen */
+    }
+
+    .search-bar {
+      padding: 10px;
+      font-size: 16px;
+      width: 80%;
+      box-sizing: border-box;
+      border: none;
+      outline: none;
+      bottom: 100px;
+    }
+    
+  .flip-container {
+    perspective: 1000px;
+  }
+
+  .flip-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+  }
+
+  .flip-card-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+
+  .flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+
+  .flip-card-back {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-inner.flipped {
+    transform: rotateY(180deg);
+  }
+
+  .flip-container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .flip-card {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .blur-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+  }
+
+
+  </style>
+<body class=" bg-white text-black">
+
+<!-- Header -->
+  <header class="flex items-center justify-between py-4 mx-4 sm:mx-8 lg:mx-20 ">
+    <!-- Logo and Title -->
+    <a href="index.html" class="flex items-center space-x-4">
+    <img src="../images/logob.png" alt="logo" style="height: 40px;"> <!-- Adjusted height -->
+    <div class="text-2xl font-bold">CollegeQuest</div>
+</a>
+
+    <!-- Hamburger Menu Button (Visible on Mobile) -->
+    <button id="hamburger" class="block lg:hidden p-2 rounded text-gray-700 hover:bg-gray-200 focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+      </svg>
+    </button>
+
+    <!-- Navigation Menu -->
+    <nav id="nav-menu" class="hidden lg:flex lg:space-x-6">
+      <ul class="flex flex-col lg:flex-row lg:space-x-6">
+        <li><a href="#" class="hover:text-blue-600">Home</a></li>
+        <li><a href="#services" class="hover:text-blue-600">Services</a></li>
+        <li><a href="#review" class="hover:text-blue-600">Reviews</a></li>
+        <li><a href="#contact" class="hover:text-blue-600">Contact</a></li>
+        <li><a href="./_auth/login.html" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Login</a></li>
+      </ul>
+    </nav>
+
+    <!-- Mobile Navigation Menu (Sliding down effect) -->
+    <div id="mobile-menu" class="absolute top-16 left-0 w-full bg-white hidden lg:hidden z-50">
+      <ul class="flex flex-col items-start p-4 space-y-4">
+        <li><a href="#" class="hover:text-blue-600">Home</a></li>
+        <li><a href="#services" class="hover:text-blue-600">Services</a></li>
+        <li><a href="#review" class="hover:text-blue-600">Reviews</a></li>
+        <li><a href="#contact" class="hover:text-blue-600">Contact</a></li>
+        <li><a href="./_auth/login.html" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Login</a></li>
+      </ul>
+    </div>
+  </header>
+  <div class="hidden">
+   <div class="flip-container w-full max-w-md mx-auto ">
+        <div class="flip-card bg-white rounded-lg shadow-lg">
+            <div class="flip-card-inner">
+                <!-- Login Form -->
+                <div class="flip-card-front p-6">
+                    <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+                    <form>
+                        <div class="mb-4">
+                            <label for="login-email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" id="login-email" name="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm" placeholder="you@example.com" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="login-password" class="block text-sm font-medium text-gray-700">Password</label>
+                            <input type="password" id="login-password" name="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm" placeholder="********" required>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Login</button>
+                    </form>
+                    <p class="mt-4 text-center text-sm text-gray-600 cursor-pointer" id="switch-to-signup">Don't have an account? Sign up</p>
+                </div>
+                <!-- Signup Form -->
+                <div class="flip-card-back p-6">
+                    <h2 class="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+                    <form>
+                        <div class="mb-4">
+                            <label for="signup-email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" id="signup-email" name="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm" placeholder="you@example.com" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="signup-password" class="block text-sm font-medium text-gray-700">Password</label>
+                            <input type="password" id="signup-password" name="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-sm" placeholder="********" required>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Sign Up</button>
+                    </form>
+                    <p class="mt-4 text-center text-sm text-gray-600 cursor-pointer" id="switch-to-login">Already have an account? Login</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+  <!--Main Section-->
+  <section class="bg-blue-50 md:h-[670px]" id="main">
+  <div class="flex flex-col md:flex-row items-center justify-between py-24  mx-4 sm:mx-8 lg:mx-20">
+    <!-- Text Content -->
+    <div class="max-w-xl mx-4 md:mx-0">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-relaxed">
+            Find Your Perfect College with CollegeQuest
+        </h1>
+        <p class="text-gray-700 mb-8 md:text-xl">
+            CollegeQuest is a college search website that helps students find their ideal college and scholarship opportunities. Our search bar integration makes it easy to find the perfect fit for your academic and financial goals.
+        </p>
+      
+  <!-- Search Button -->
+
+<span id="search-btn" class="bg-blue-600 text-white px-8 py-4 rounded hover:bg-blue-700 text-lg cursor-pointer">Search</span>
+
+<!-- Search Container -->
+<div
+  id="search-container"
+  class="fixed inset-0 flex items-start justify-center scale-0 transition-transform duration-500 ease-in-out bg-white bg-opacity-90 shadow-lg z-50 rounded-lg overflow-hidden left-[20px] top-[100px] w-[90%] h-[120px] md:w-[50%] md:h-[80%] md:left-[370px] md:top-[100px]"
+>
+  <div class="relative w-full h-full flex items-start justify-center pt-10">
+    <input
+      type="search"
+      class="p-4 text-lg w-11/12 md:w-4/5 max-w-3xl box-border border-none outline-none bg-white rounded-lg"
+      placeholder="Search..."
+      id="search"
+      onkeypress="handleKeyPress(event)"
+    />
+  </div>
+</div>
+
+
+
+    </div>
+
+    <!-- Image Content -->
+    <div class="hidden md:block mt-8 md:mt-0 w-full max-w-2xl h-auto">
+        <img src="./images/image.png" alt="Illustration of a student and search bar" class="w-full h-auto object-cover">
+    </div>
+  </div>
+  </section>
+   <!-- Services Section -->
+  <section id="services" class="min-h-screen bg-white  py-16">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold mx-1 md:mx-10 mb-12">Our Services</h2>
+    <div class="flex flex-col md:flex-row justify-around items-center space-y-12 md:space-y-0 md:space-x-6">
+      
+      <!-- Service 1 -->
+      <div class="max-w-sm bg-gray-100 shadow-md overflow-hidden rounded-lg">
+        <img src="./images/s1.webp" alt="Search Bar Integration" class="w-full h-[300px] object-cover">
+        <div class="p-6">
+          <h3 class="text-2xl font-semibold mb-4">Search Bar Integration</h3>
+          <p class="text-gray-700 mb-4">Our search bar integration service allows you to integrate our college search engine onto your website or application, providing your users with a convenient and...</p>
+          <a href="#" class="text-blue-600 font-bold hover:underline">Read More</a>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="max-w-sm bg-gray-100 shadow-md rounded-lg overflow-hidden ">
+        <img src="./images/s2.webp" alt="College Search" class="w-full h-[300px] object-cover ">
+        <div class="p-6">
+          <h3 class="text-2xl font-semibold mb-4">College Search</h3>
+          <p class="text-gray-700 mb-4">Our college search service offers a comprehensive database of colleges and universities across the United States to help you find the perfect college that aligns...</p>
+          <a href="#" class="text-blue-600 font-bold hover:underline">Read More</a>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="max-w-sm bg-gray-100 shadow-md rounded-lg overflow-hidden">
+        <img src="./images/s3.webp" alt="Scholarship Finder" class="w-full h-[300px] object-cover">
+        <div class="p-6">
+          <h3 class="text-2xl font-semibold mb-4">Scholarship Finder</h3>
+          <p class="text-gray-700 mb-4">Our scholarship finder service helps you search and apply for scholarships that match your academic qualifications, interests, and financial needs to make your college education...</p>
+          <a href="#" class="text-blue-600 font-bold hover:underline">Read More</a>
+        </div>
+      </div>
+
+    </div>
+    <!-- Features & Benefits Title -->
+<div class="flex items-center justify-center my-12 mx-10">
+  <!-- Horizontal Line -->
+  <div class="h-px bg-gray-400 flex-grow"></div>
+
+  <!-- Title Text -->
+  <h2 class="text-2xl font-bold px-4 text-center text-gray-800">Features & Benefits</h2>
+
+  <!-- Horizontal Line -->
+  <div class="h-px bg-gray-400 flex-grow"></div>
+</div>
+<div class="flex flex-col lg:flex-row justify-between items-start mx-5 sm:mx-8 lg:mx-20 space-y-8 lg:space-y-0 lg:space-x-12 ">
+  
+  <!-- Features Section -->
+  <div class="w-full lg:w-1/3 ">
+    <h3 class="text-xl font-bold mb-4">Features</h3>
+    <ul class="list-disc list-inside space-y-5 text-gray-700">
+      <li>Extensive College Database</li>
+      <li>Search Bar Integration for Easy Navigation</li>
+      <li>Scholarship Finder for Financial Assistance</li>
+      <li>User-Friendly Interface</li>
+      <li>Customized College Matches Based on Your Goals</li>
+    </ul>
+  </div>
+  <!-- Benefits Section -->
+  <div class="w-full lg:w-1/3 h-[300px]">
+    <h3 class="text-xl font-bold mb-4">Benefits</h3>
+    <ul class="list-disc list-inside space-y-5 text-gray-700">
+      <li>Personalized College Recommendations</li>
+      <li>Access to a Wide Range of Scholarships</li>
+      <li>Easily Track Your Progress</li>
+      <li>Secure Payment Options</li>
+      <li>Helpful Support and Resources</li>
+    </ul>
+  </div>
+  
+  <!-- Image Section -->
+  <div class="w-full lg:w-1/3">
+    <img src="./images/s4.webp" alt="Benefits" class="h-auto w-full max-h-[250px] object-cover rounded-lg hidden md:block">
+  </div>
+  
+</div>
+
+  </div>
+</section>
+<section class="bg-blue-50 min-h-screen py-12" id="review">
+  <div class="mx-4 sm:mx-8 lg:mx-20">
+    <h2 class="text-3xl font-bold  mb-8 mx-5">Client Testimonials</h2>
+    <p class="mb-12 text-lg mx-5">Hear What Our Clients Have to Say About Us</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Testimonial 1 -->
+      <div class="p-6 rounded-lg shadow-md">
+        <div class="text-xl font-semibold mb-4">⭐⭐⭐⭐⭐</div>
+        <p class="text-lg mb-4">CollegeQuest's platform is so user-friendly and intuitive. I found my dream school and scholarship opportunities without any stress or hassle.</p>
+        <div class="flex items-center mt-4">
+          <img src="./images/p1.webp" alt="Client Image" class="w-12 h-12 rounded-full mr-4">
+          <div class="text-lg font-bold">SARAH THOMPSON</div>
+        </div>
+      </div>
+      
+      <!-- Testimonial 2 -->
+      <div class="p-6 rounded-lg shadow-md">
+        <div class="text-xl font-semibold mb-4">⭐⭐⭐⭐⭐</div>
+        <p class="text-lg mb-4">CollegeQuest made my college search so much easier. I couldn't be happier with the results!</p>
+        <div class="flex items-center mt-4">
+          <img src="./images/p2.webp" alt="Client Image" class="w-12 h-12 rounded-full mr-4">
+          <div class="text-lg font-bold">JASON MILLER</div>
+        </div>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="p-6 rounded-lg shadow-md">
+        <div class="text-xl font-semibold mb-4">⭐⭐⭐⭐⭐</div>
+        <p class="text-lg mb-4">Thanks to CollegeQuest, I found the perfect college and received a great scholarship. Highly recommend!</p>
+        <div class="flex items-center mt-4">
+          <img src="./images/p3.webp" alt="Client Image" class="w-12 h-12 rounded-full mr-4">
+          <div class="text-lg font-bold">EMILY JOHNSON</div>
+        </div>
+      </div>
+
+      <!-- Testimonial 4 -->
+      <div class="p-6 rounded-lg shadow-md">
+        <div class="text-xl font-semibold mb-4">⭐⭐⭐⭐⭐</div>
+        <p class="text-lg mb-4">The platform is top-notch, and the customer service is even better. CollegeQuest is the real deal!</p>
+        <div class="flex items-center mt-4">
+          <img src="./images/p4.webp" alt="Client Image" class="w-12 h-12 rounded-full mr-4">
+          <div class="text-lg font-bold">MICHAEL WILLIAMS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="contact" class="py-12">
+  <div class="mx-4 sm:mx-8 lg:mx-20">
+    <h1 class="text-3xl font-bold mb-6">Have Questions?</h1>
+    <p class="text-lg mb-8 md:max-w-[500px]">
+      Please feel free to call or email us, or use our contact form to get in touch with us. We look forward to hearing from you!
+    </p>
+    <div class="flex flex-col md:flex-row md:space-x-12">
+      <div class="md:w-1/2 mb-6 md:mb-0">
+        <div class="text-xl font-semibold mb-4">Emergency? Call Us:</div>
+        <div class="text-lg mb-6">+918237742040</div>
+        <div class="text-xl font-semibold mb-4">Send Us Mail</div>
+        <div class="text-lg mb-6">gopalgawas2004@gmail.com</div>
+        <div class="text-xl font-semibold mb-4">Find the Studio</div>
+        <!-- You can add a map or address here if needed -->
+      </div>
+      <div class="md:w-1/2">
+        <div class="bg-blue-50 p-6 rounded-md shadow-md md:relative bottom-[100px]">
+          <form id="form" class="space-y-6">
+            <input type="text" placeholder="Name" class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="email" placeholder="Email Address" class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="text" placeholder="Subject" class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <textarea placeholder="Your Message" class="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" rows="6"></textarea>
+            <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer id="footer" class="bg-blue-50 text-black py-8">
+  <div class="mx-4 sm:mx-8 lg:mx-20">
+    <div class="flex flex-col md:flex-row md:justify-between md:items-start">
+      <!-- Company Info -->
+      <div class="mb-6 md:mb-0">
+        <h2 class="text-xl font-semibold mb-4">CollegeQuest</h2>
+        <p class="mb-4">Your trusted partner in finding the perfect college and scholarship opportunities.</p>
+        <div class="text-lg mb-2">© 2024 CollegeQuest</div>
+        <div class="text-lg mb-2">+918237742040</div>
+        <div class="text-lg">gopalgawas2004@gmail.com</div>
+      </div>
+      
+      <!-- Quick Links -->
+      <div class="mb-6 md:mb-0">
+        <h2 class="text-xl font-semibold mb-4">Quick Links</h2>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-blue-600">Home</a></li>
+          <li><a href="#" class="hover:text-blue-600">Services</a></li>
+          <li><a href="#" class="hover:text-blue-600">Reviews</a></li>
+          <li><a href="#" class="hover:text-blue-600">Contact</a></li>
+          <li><a href="#" class="hover:text-blue-600">About Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Media Links -->
+      <div>
+        <h2 class="text-xl font-semibold mb-4">Follow Us</h2>
+        <div class="flex space-x-4 text-2xl">
+          <a href="https://instagram.com" target="_blank" class="hover:text-blue-300">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://facebook.com" target="_blank" class="hover:text-blue-300">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" class="hover:text-blue-300">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://youtube.com" target="_blank" class="hover:text-blue-300">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+<script src="index.js"></script>
+
+</html>

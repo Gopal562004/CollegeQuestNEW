@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-96">
+      <h2 class="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+
+      <div id="error-message" class="text-red-500 mb-4"></div>
+
+      <form id="signup-form">
+        <div class="mb-4">
+          <label for="name" class="block text-gray-700">Full Name</label>
+          <input type="text" id="name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300" required>
+        </div>
+
+        <div class="mb-4">
+          <label for="email" class="block text-gray-700">Email</label>
+          <input type="email" id="email" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300" required>
+        </div>
+
+        <div class="mb-4">
+          <label for="password" class="block text-gray-700">Password</label>
+          <input type="password" id="password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-300" required>
+        </div>
+
+        <button id="signup-btn" type="button" class="bg-green-500 text-white px-4 py-2 rounded-lg w-full hover:bg-green-700">Sign Up</button>
+
+        <p class="text-sm text-center mt-4">
+          Already have an account? <a href="login.html" class="text-blue-500 hover:underline">Login</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+
+  <!-- Your Firebase Config -->
+  <script>
+     const firebaseConfig = {
+  apiKey: "AIzaSyDPqF6iiONiN6WEGsv6GtyPDaPK8b_1ROc",
+  authDomain: "collegequest-101dc.firebaseapp.com",
+  databaseURL: "https://collegequest-101dc-default-rtdb.firebaseio.com",
+  projectId: "collegequest-101dc",
+  storageBucket: "collegequest-101dc.appspot.com",
+  messagingSenderId: "900326719034",
+  appId: "1:900326719034:web:4a4b48ecfb2d927bfd7f03",
+  measurementId: "G-BY25JWXVWJ",
+};
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    const signupBtn = document.getElementById('signup-btn');
+    const errorMessage = document.getElementById('error-message');
+
+    signupBtn.addEventListener('click', () => {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+
+          // Update user profile with the display name
+          user.updateProfile({ displayName: name }).then(() => {
+            // Show alert message for signup success
+            alert('Signup successful!');
+
+            // Clear input fields
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+
+            // Redirect to index.html after successful signup
+            window.location.href = '../index.html';
+          });
+        })
+        .catch((error) => {
+          errorMessage.textContent = error.message;
+        });
+    });
+  </script>
+</body>
+</html>

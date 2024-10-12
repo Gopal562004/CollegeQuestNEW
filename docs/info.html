@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="info.css">
+</head>
+<body>
+<header class="flex items-center justify-between py-4 mx-4 sm:mx-8 lg:mx-20">
+  <!-- Logo and Title -->
+  <div class="flex items-center space-x-4">
+    <img src="../images/logob.png" alt="logo" style="height: 40px;"> <!-- Adjusted height -->
+    <div class="text-2xl font-bold">CollegeQuest</div>
+  </div>
+
+  <!-- Search Button and Login -->
+  <div class="flex items-center space-x-4 relative">
+    <button id="search-btn" class="bg-gray-100 p-2 rounded-full shadow hover:bg-gray-200">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10a5 5 0 11-10 0 5 5 0 0110 0zM21 21l-4.35-4.35"></path>
+      </svg>
+    </button>
+    <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Login</a>
+  </div>
+</header>
+<section class="bg-blue-50 p-6 h-auto md:h-[670px]">
+  <div class="container mx-auto flex flex-col justify-center h-full relative ">
+    <!-- Centered Logo and Title -->
+    <div class="flex flex-col items-center justify-center mb-8 md:mb-16">
+      <div class="flex-shrink-0 mb-4 sm:h-25">
+        <img src="../images/st.jpeg" alt="collegelogo" class="object-cover h-32 ">
+      </div>
+      <div class="text-center">
+        <h2 class="text-2xl font-bold">St. John College of Engineering and Management - [SJCEM], Palghar</h2>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="w-full mt-8 md:mt-16">
+      <p class="mb-4 font-semibold text-xl text-center md:text-left md:mx-10">About St. John College of Engineering and Management - [SJCEM], Palghar</p>
+      
+      <!-- Mobile Specific About Section -->
+      <div class="block md:hidden">
+        <div id="about-short" class="max-h-[150px] overflow-hidden transition-all duration-300">
+          <p id="about-text">
+            Established in 2008, St. John College of Engineering & Management is a premier Institute located in Maharashtra. The institute offers Degree and Diploma courses including 8 UG and 2 PG courses. Additionally, it also has After 10th Diploma courses. These programs are offered in Full Time mode. St. John College of Engineering & Management is a premier institute for After 10th Diploma, MMS, MBA/PGDM, B.E. / B.Tech courses. Candidates can pursue a range of courses like After 10th Diploma, MMS, MBA/PGDM, B.E. / B.Tech with streams in Engineering, Business & Management Studies. Over the period, St. John College of Engineering & Management has gained expertise through its trained and experienced faculty in the fields of Civil Engineering, Computer Science Engineering, Mechanical Engineering, Information Technology, Electronics Engineering, Artificial Intelligence & Machine Learning. Courses offered by the institute are recognized by approving bodies like AICTE. St. John College of Engineering & Management offers courses for 750 seats. Courses offered by the Institute are in the fee range of INR 18,000-280,000 for a total of 750 candidates.
+          </p>
+        </div>
+        <button id="read-more-btn" class="text-blue-500 font-semibold hover:underline mt-2">More</button>
+      </div>
+      
+      <!-- Desktop About Section -->
+      <div class="hidden md:block text-xl md:mx-10">
+        <p class="leading-relaxed tracking-wide">
+          Established in 2008, St. John College of Engineering & Management is a premier Institute located in Maharashtra. The institute offers Degree and Diploma courses including 8 UG and 2 PG courses. Additionally, it also has After 10th Diploma courses. These programs are offered in Full Time mode. St. John College of Engineering & Management is a premier institute for After 10th Diploma, MMS, MBA/PGDM, B.E. / B.Tech courses. Candidates can pursue a range of courses like After 10th Diploma, MMS, MBA/PGDM, B.E. / B.Tech with streams in Engineering, Business & Management Studies. Over the period, St. John College of Engineering & Management has gained expertise through its trained and experienced faculty in the fields of Civil Engineering, Computer Science Engineering, Mechanical Engineering, Information Technology, Electronics Engineering, Artificial Intelligence & Machine Learning. Courses offered by the institute are recognized by approving bodies like AICTE. St. John College of Engineering & Management offers courses for 750 seats. Courses offered by the Institute are in the fee range of INR 18,000-280,000 for a total of 750 candidates.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="min-h-screen py-16">
+  <div class="text-xl font-bold mb-6 mx-10 lg:mx-20">Courses And Fees</div>
+  <!-- Container to center and pad the content -->
+  <div class="container px-4 lg:px-20 flex flex-col items-center">
+    <!-- Title -->
+    
+
+    <!-- Table Wrapper with responsive and centered positioning -->
+    <div class="overflow-x-auto mb-12 md:w-[900px]">
+      <table class="w-full lg:w-10/12 border-collapse bg-white shadow-lg mx-auto">
+        <thead class="bg-blue-50 text-gray-800">
+          <tr>
+            <th class="border border-gray-300 px-4 py-2 w-1/3">Courses</th>
+            <th class="border border-gray-300 px-4 py-2 w-1/3">Tuition Fees</th>
+            <th class="border border-gray-300 px-4 py-2 w-1/3">Eligibility</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-white even:bg-gray-50">
+            <td class="border border-gray-300 px-4 py-2">B.E. / B.Tech</td>
+            <td class="border border-gray-300 px-4 py-2">2.3 L</td>
+            <td class="border border-gray-300 px-4 py-2">10+2 : 45 % Exams : JEE MainMHT CET</td>
+          </tr>
+          <tr class="bg-white even:bg-gray-50">
+            <td class="border border-gray-300 px-4 py-2">After 10th Diploma</td>
+            <td class="border border-gray-300 px-4 py-2">18 K</td>
+            <td class="border border-gray-300 px-4 py-2">Exams : CBSE 10th</td>
+          </tr>
+          <tr class="bg-white even:bg-gray-50">
+            <td class="border border-gray-300 px-4 py-2">MBA/PGDM</td>
+            <td class="border border-gray-300 px-4 py-2">2.8 L</td>
+            <td class="border border-gray-300 px-4 py-2">Graduation : 50 % Exams : MATXAT+5 More</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Cards Wrapper -->
+    <div class="container mx-auto p-4">
+      <!-- Cards displayed in 3 rows and 2 columns -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 md:mx-10">
+        <!-- Card 1 -->
+        <div class="bg-blue-50 shadow-md rounded-lg p-6 w-full mx-auto transition-transform transform hover:scale-105 hover:shadow-xl" style="transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;">
+          <span class="name-courses font-bold text-lg">B.E. in Computer Engineering</span>
+          <div class="line my-2 h-px bg-gray-300"></div>
+          <span class="seat-field block mb-2">Seats: 
+            <span class="seat-main font-semibold">120</span>
+          </span>
+          <span class="exams-expected seat-field block mb-2">Exams Accepted: 
+            <span class="seat-main font-semibold">JEE mains / MHT CET</span>
+          </span>
+          <span class="seat-field block mb-2">1st year fees: 
+            <span class="fees seat-main font-semibold text-green-600">₹ 94,000</span>
+          </span>
+          <span class="seat-field block">Course Duration: 
+            <span class="duration seat-main font-semibold text-red-600">4 Years</span>
+          </span>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-blue-50 shadow-md rounded-lg p-6 w-full mx-auto transition-transform transform hover:scale-105 hover:shadow-xl" style="transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;">
+          <span class="name-courses font-bold text-lg">B.Tech. in Civil Engineering</span>
+          <div class="line my-2 h-px bg-gray-300"></div>
+          <span class="seat-field block mb-2">Seats: 
+            <span class="seat-main font-semibold">60</span>
+          </span>
+          <span class="exams-expected seat-field block mb-2">Exams Accepted: 
+            <span class="seat-main font-semibold">JEE mains / MHT CET</span>
+          </span>
+          <span class="seat-field block mb-2">1st year fees: 
+            <span class="fees seat-main font-semibold text-green-600">₹ 94,000</span>
+          </span>
+          <span class="seat-field block">Course Duration: 
+            <span class="duration seat-main font-semibold text-red-600">4 Years</span>
+          </span>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-blue-50 shadow-md rounded-lg p-6 w-full mx-auto transition-transform transform hover:scale-105 hover:shadow-xl" style="transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;">
+          <span class="name-courses font-bold text-lg">B.E. in Computer Engineering</span>
+          <div class="line my-2 h-px bg-gray-300"></div>
+          <span class="seat-field block mb-2">Seats: 
+            <span class="seat-main font-semibold">120</span>
+          </span>
+          <span class="exams-expected seat-field block mb-2">Exams Accepted: 
+            <span class="seat-main font-semibold">JEE mains / MHT CET</span>
+          </span>
+          <span class="seat-field block mb-2">1st year fees: 
+            <span class="fees seat-main font-semibold text-green-600">₹ 94,000</span>
+          </span>
+          <span class="seat-field block">Course Duration: 
+            <span class="duration seat-main font-semibold text-red-600">4 Years</span>
+          </span>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-blue-50 shadow-md rounded-lg p-6 w-full mx-auto transition-transform transform hover:scale-105 hover:shadow-xl" style="transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;">
+          <span class="name-courses font-bold text-lg">B.E. in Computer Engineering</span>
+          <div class="line my-2 h-px bg-gray-300"></div>
+          <span class="seat-field block mb-2">Seats: 
+            <span class="seat-main font-semibold">120</span>
+          </span>
+          <span class="exams-expected seat-field block mb-2">Exams Accepted: 
+            <span class="seat-main font-semibold">JEE mains / MHT CET</span>
+          </span>
+          <span class="seat-field block mb-2">1st year fees: 
+            <span class="fees seat-main font-semibold text-green-600">₹ 94,000</span>
+          </span>
+          <span class="seat-field block">Course Duration: 
+            <span class="duration seat-main font-semibold text-red-600">4 Years</span>
+          </span>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="bg-blue-50 shadow-md rounded-lg p-6 w-full mx-auto transition-transform transform hover:scale-105 hover:shadow-xl" style="transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;">
+          <span class="name-courses font-bold text-lg">B.Tech. in Computer Engineering</span>
+          <div class="line my-2 h-px bg-gray-300"></div>
+          <span class="seat-field block mb-2">Seats: 
+            <span class="seat-main font-semibold">120</span>
+          </span>
+          <span class="exams-expected seat-field block mb-2">Exams Accepted: 
+            <span class="seat-main font-semibold">JEE mains / MHT CET</span>
+          </span>
+          <span class="seat-field block mb-2">1st year fees: 
+            <span class="fees seat-main font-semibold text-green-600">₹ 94,000</span>
+          </span>
+          <span class="seat-field block">Course Duration: 
+            <span class="duration seat-main font-semibold text-red-600">4 Years</span>
+          </span>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="bg-blue-50 shadow-md rounded-lg p-6 w-full mx-auto transition-transform transform hover:scale-105 hover:shadow-xl" style="transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;">
+          <span class="name-courses font-bold text-lg">B.Tech. in Computer Engineering</span>
+          <div class="line my-2 h-px bg-gray-300"></div>
+          <span class="seat-field block mb-2">Seats: 
+            <span class="seat-main font-semibold">120</span>
+          </span>
+          <span class="exams-expected seat-field block mb-2">Exams Accepted: 
+            <span class="seat-main font-semibold">JEE mains / MHT CET</span>
+          </span>
+          <span class="seat-field block mb-2">1st year fees: 
+            <span class="fees seat-main font-semibold text-green-600">₹ 94,000</span>
+          </span>
+          <span class="seat-field block">Course Duration: 
+            <span class="duration seat-main font-semibold text-red-600">4 Years</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="min-h-screen bg-blue-50 py-16">
+  <div class="container mx-auto px-4 lg:px-8">
+    <!-- Title Section -->
+    <div class="font-bold text-xl mb-8 text-center md:text-left md:mx-10">
+      Cut-offs & Placements
+    </div>
+
+    <!-- Table Section -->
+    <div class="mb-12 overflow-x-auto">
+      <div class="max-w-full md:max-w-4xl mx-auto"> <!-- Added max-width for desktop -->
+        <div class="h-[350px] overflow-y-auto">
+          <table class="custom-table w-full border-collapse bg-white shadow-md">
+            <thead class="bg-blue-100 text-gray-800">
+              <tr>
+                <th class="heading-col border border-gray-300 px-4 py-2">Courses</th>
+                <th class="heading-col border border-gray-300 px-4 py-2">2023</th>
+                <th class="heading-col border border-gray-300 px-4 py-2">2022</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Example Row -->
+              <tr class="bg-white even:bg-gray-50">
+                <td class="border border-gray-300 px-4 py-2">BE Computer Engineering</td>
+                <td class="border border-gray-300 px-4 py-2"><span id="comps-cutoff-2023">${collegeData.cutoffs.comps.new || "N/A"}</span></td>
+                <td class="border border-gray-300 px-4 py-2"><span id="comps-cutoff-2022">${collegeData.cutoffs.comps.old || "N/A"}</span></td>
+              </tr>
+              <!-- Repeat for other rows -->
+               <tr class="bg-white even:bg-gray-50">
+                <td class="border border-gray-300 px-4 py-2">BE Computer Engineering</td>
+                <td class="border border-gray-300 px-4 py-2"><span id="comps-cutoff-2023">${collegeData.cutoffs.comps.new || "N/A"}</span></td>
+                <td class="border border-gray-300 px-4 py-2"><span id="comps-cutoff-2022">${collegeData.cutoffs.comps.old || "N/A"}</span></td>
+              </tr>
+              <tr class="bg-white even:bg-gray-50">
+                <td class="border border-gray-300 px-4 py-2">BE Computer Engineering</td>
+                <td class="border border-gray-300 px-4 py-2"><span id="comps-cutoff-2023">${collegeData.cutoffs.comps.new || "N/A"}</span></td>
+                <td class="border border-gray-300 px-4 py-2"><span id="comps-cutoff-2022">${collegeData.cutoffs.comps.old || "N/A"}</span></td>
+              </tr>
+              <tr class="bg-white even:bg-gray-50">
+                <td class="border border-gray-300 px-4 py-2">BE Computer Engineering</td>
+                <td class="border border-gray-300 px-4 py-2"><span id="comps-cutoff-2023">${collegeData.cutoffs.comps.new || "N/A"}</span></td>
+                <td class="border border-gray-300 px-4 py-2"><span id="comps-cutoff-2022">${collegeData.cutoffs.comps.old || "N/A"}</span></td>
+              </tr>
+              <tr class="bg-white even:bg-gray-50">
+                <td class="border border-gray-300 px-4 py-2">BE Computer Engineering</td>
+                <td class="border border-gray-300 px-4 py-2"><span id="comps-cutoff-2023">${collegeData.cutoffs.comps.new || "N/A"}</span></td>
+                <td class="border border-gray-300 px-4 py-2"><span id="comps-cutoff-2022">${collegeData.cutoffs.comps.old || "N/A"}</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Graph and Description Section -->
+    <div class="flex flex-col lg:flex-row lg:space-x-8 mb-12">
+      <!-- Graph Container -->
+      <div class="flex-1 mb-8 lg:mb-0">
+        <div class="relative">
+          <canvas id="lineChart" class="w-full h-[300px] lg:h-[415px]"></canvas>
+          <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-gray-700">
+            Graph
+          </div>
+        </div>
+        <div class="text-lg font-semibold mt-4 text-center">Placement Graph</div>
+        <div class="text-gray-700 mt-2 md:mx-10 text-center md:text-left">
+          "Above this graph, lies the culmination of dreams, hard work, and dedication. It's a testament to our commitment to excellence and the success stories that define us. Explore our journey, witness the transformation, and be inspired to carve your own path to greatness. Together, let's celebrate achievement and embrace the endless possibilities that lie ahead."
+        </div>
+      </div>
+
+      <!-- Map Section -->
+      <div class="flex-1">
+        <div class="flex justify-center">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3756.1545023702033!2d72.78093297494425!3d19.706045231892034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be71c92fbd91e67%3A0x2a3ce68676417a45!2sSt.%20John%20College%20of%20Engineering%20and%20Management!5e0!3m2!1sen!2sin!4v1724530055088!5m2!1sen!2sin" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade" class="w-full h-[300px] md:h-[460px] md:w-[390px]">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="min-h-screen bg-white py-16">
+  <div class="container mx-auto px-4 lg:px-8 ">
+    <!-- Admission Information -->
+    <div class="mb-12 md:mx-10">
+      <div class="text-2xl font-bold mb-4">Admission</div>
+      <div class="text-left mx-2">
+        <ul class="list-disc list-inside space-y-2 text-gray-700">
+          <li>Application process for BE course is carried out offline.</li>
+          <li>Candidates can download the application form available at the official college website.</li>
+          <li>Candidates should have passed the 10+2 examination or equivalent from a recognized board of education.</li>
+          <li>Candidates should have qualified a state/ national level entrance examination. Preferably, MHT-CET or JEE Main.</li>
+          <li>The application form is available on the official college website.</li>
+          <li>Candidates should have a bachelor’s degree from a recognized university to apply for admission to PG courses.</li>
+          <li>Candidates should have qualified the CET (Common Entrance Test) for MMS.</li>
+          <li>Selection is done on the basis of scores/ ranks obtained in the entrance examination.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Highlight Table -->
+    <div class="mb-12 md:mx-10">
+      <div class="text-xl font-semibold mb-4">Highlight Table</div>
+      <div class="overflow-x-auto">
+        <table id="myTable" class="w-full border-collapse bg-white shadow-md">
+          <tbody>
+            <tr class="border-b border-gray-300">
+              <td class="px-4 py-2 font-medium">Name of the College</td>
+              <td class="px-4 py-2"><span id="college-name-table">${collegeData.name}</span></td>
+            </tr>
+            <tr class="border-b border-gray-300">
+              <td class="px-4 py-2 font-medium">College Type</td>
+              <td class="px-4 py-2"><span id="college-type">Private</span></td>
+            </tr>
+            <tr class="border-b border-gray-300">
+              <td class="px-4 py-2 font-medium">Basic Admission Criteria</td>
+              <td class="px-4 py-2"><span id="basic-addmission-criteria">Entrance and Merit-based</span></td>
+            </tr>
+            <tr class="border-b border-gray-300">
+              <td class="px-4 py-2 font-medium">Application Mode</td>
+              <td class="px-4 py-2"><span id="application-mode">Online</span></td>
+            </tr>
+            <tr class="border-b border-gray-300">
+              <td class="px-4 py-2 font-medium">Name of the Entrance</td>
+              <td class="px-4 py-2"><span id="name-of-the-entrance">MHT-CET</span></td>
+            </tr>
+            <tr class="border-b border-gray-300">
+              <td class="px-4 py-2 font-medium">Counselling</td>
+              <td class="px-4 py-2"><span id="counselling">State</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Admission Details -->
+    <div class="mb-12 md:mx-10">
+      <div class="text-xl font-semibold mb-4">St. John’s College of Engineering And Management BE Admission 2024</div>
+      <div class="text-gray-700 mb-8">
+        The admission process for BE courses will be carried out online through the official website and the admissions are done on merit basis. Candidates should have passed the 10+2 examination or equivalent from a recognized board of education.
+        The application process for BE is done offline. Candidates are advised to download the application form available at the official college website upon submitting the fee of INR 1000.
+      </div>
+      <div class="overflow-x-auto">
+        <table id="myTable" class="w-full border-collapse bg-white shadow-md">
+          <thead class="bg-blue-100 text-gray-800">
+            <tr>
+              <th class="border border-gray-300 px-4 py-2">Course Name</th>
+              <th class="border border-gray-300 px-4 py-2">Specialization</th>
+              <th class="border border-gray-300 px-4 py-2">Minimum Eligibility</th>
+              <th class="border border-gray-300 px-4 py-2">Selection Criteria</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-white even:bg-gray-50">
+              <td rowspan="5" class="border border-gray-300 px-4 py-2">BE</td>
+              <td class="border border-gray-300 px-4 py-2">Civil Engineering</td>
+              <td rowspan="5" class="border border-gray-300 px-4 py-2">Candidates will have to pass the 10+2 examination or equivalent from a recognized board of education with a minimum aggregate score of 50% (45% for reserved candidates).</td>
+              <td rowspan="5" class="border border-gray-300 px-4 py-2">The selection is done on merit based on the score/ rank obtained in the entrance examination. The preferred exams are MHT-CET and JEE Mains.</td>
+            </tr>
+            <tr class="bg-white even:bg-gray-50">
+              <td class="border border-gray-300 px-4 py-2">Computer Engineering</td>
+            </tr>
+            <tr class="bg-white even:bg-gray-50">
+              <td class="border border-gray-300 px-4 py-2">Electronics and Telecommunication Engineering</td>
+            </tr>
+            <tr class="bg-white even:bg-gray-50">
+              <td class="border border-gray-300 px-4 py-2">Information Technology</td>
+            </tr>
+            <tr class="bg-white even:bg-gray-50">
+              <td class="border border-gray-300 px-4 py-2">Mechanical Engineering</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="min-h-screen bg-blue-50 py-16">
+  <div class="container mx-auto px-4 ">
+    <div class="mb-8 flex justify-between items-center md:mx-10">
+      <h2 class="text-2xl font-bold">Reviews</h2>
+      <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Write A Review</button>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 md:mx-10">
+      <!--BOX-1-->
+      <div class="testimonial-box bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="box-top p-4 flex items-center">
+          <!--profile-->
+          <div class="profile flex items-center">
+            <div class="profile-img w-12 h-12 mr-4 rounded-full overflow-hidden">
+              <img src="images/c-1.jpg" alt="Profile Image" class="w-full h-full object-cover" />
+            </div>
+            <div class="name-user">
+              <strong class="block text-lg font-semibold">${collegeData.reviews.r3.username}</strong>
+              <span class="text-gray-600 text-sm">Batch 2021, B.Tech, April 18, 2020</span>
+            </div>
+          </div>
+          <!--reviews-->
+          <div class="reviews ml-auto flex items-center">
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="far fa-star text-yellow-400"></i><!--Empty star-->
+          </div>
+        </div>
+        <!--Comments-->
+        <div class="client-comment p-4">
+          <p>${collegeData.reviews.r1.review}</p>
+        </div>
+      </div>
+      <!--BOX-2-->
+      <div class="testimonial-box bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="box-top p-4 flex items-center">
+          <!--profile-->
+          <div class="profile flex items-center">
+            <div class="profile-img w-12 h-12 mr-4 rounded-full overflow-hidden">
+              <img src="images/c-2.jpg" alt="Profile Image" class="w-full h-full object-cover" />
+            </div>
+            <div class="name-user">
+              <strong class="block text-lg font-semibold">${collegeData.reviews.r3.username}</strong>
+              <span class="text-gray-600 text-sm">Batch 2020, B.Tech, November 7, 2018</span>
+            </div>
+          </div>
+          <!--reviews-->
+          <div class="reviews ml-auto flex items-center">
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i><!--Empty star-->
+          </div>
+        </div>
+        <!--Comments-->
+        <div class="client-comment p-4">
+          <p>${collegeData.reviews.r2.review}</p>
+        </div>
+      </div>
+      <!--BOX-3-->
+      <div class="testimonial-box bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="box-top p-4 flex items-center">
+          <!--profile-->
+          <div class="profile flex items-center">
+            <div class="profile-img w-12 h-12 mr-4 rounded-full overflow-hidden">
+              <img src="images/c-3.jpg" alt="Profile Image" class="w-full h-full object-cover" />
+            </div>
+            <div class="name-user">
+              <strong class="block text-lg font-semibold">${collegeData.reviews.r3.username}</strong>
+              <span class="text-gray-600 text-sm">[M.C.A], January 24, 2024</span>
+            </div>
+          </div>
+          <!--reviews-->
+          <div class="reviews ml-auto flex items-center">
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="far fa-star text-yellow-400"></i><!--Empty star-->
+          </div>
+        </div>
+        <!--Comments-->
+        <div class="client-comment p-4">
+          <p>${collegeData.reviews.r3.review}</p>
+        </div>
+      </div>
+      <!--BOX-4-->
+      <div class="testimonial-box bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="box-top p-4 flex items-center">
+          <!--profile-->
+          <div class="profile flex items-center">
+            <div class="profile-img w-12 h-12 mr-4 rounded-full overflow-hidden">
+              <img src="images/c-4.jpg" alt="Profile Image" class="w-full h-full object-cover" />
+            </div>
+            <div class="name-user">
+              <strong class="block text-lg font-semibold">${collegeData.reviews.r3.username}</strong>
+              <span class="text-gray-600 text-sm">B.Tech, July 2, 2020</span>
+            </div>
+          </div>
+          <!--reviews-->
+          <div class="reviews ml-auto flex items-center">
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i><!--Empty star-->
+          </div>
+        </div>
+        <!--Comments-->
+        <div class="client-comment p-4">
+          <p>${collegeData.reviews.r4.review}</p>
+        </div>
+      </div>
+      <!--BOX-5-->
+      <div class="testimonial-box bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="box-top p-4 flex items-center">
+          <!--profile-->
+          <div class="profile flex items-center">
+            <div class="profile-img w-12 h-12 mr-4 rounded-full overflow-hidden">
+              <img src="images/c-3.jpg" alt="Profile Image" class="w-full h-full object-cover" />
+            </div>
+            <div class="name-user">
+              <strong class="block text-lg font-semibold">Aniket Rathod</strong>
+              <span class="text-gray-600 text-sm">B.Tech, EXTC</span>
+            </div>
+          </div>
+          <!--reviews-->
+          <div class="reviews ml-auto flex items-center">
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="far fa-star text-yellow-400"></i><!--Empty star-->
+          </div>
+        </div>
+        <!--Comments-->
+        <div class="client-comment p-4">
+          <p>Placement Experience: Yes, there are placement drives in the college. Students who are enrolled in the final year are eligible for campus drives. The average package of the college is 4.5 lakh. Many companies come here throughout the year. Some are core companies and some are IT companies.</p>
+        </div>
+      </div>
+      <!--BOX-6-->
+      <div class="testimonial-box bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="box-top p-4 flex items-center">
+          <!--profile-->
+          <div class="profile flex items-center">
+            <div class="profile-img w-12 h-12 mr-4 rounded-full overflow-hidden">
+              <img src="images/c-3.jpg" alt="Profile Image" class="w-full h-full object-cover" />
+            </div>
+            <div class="name-user">
+              <strong class="block text-lg font-semibold">Rohit Gupta</strong>
+              <span class="text-gray-600 text-sm">B.Tech, EXTC</span>
+            </div>
+          </div>
+          <!--reviews-->
+          <div class="reviews ml-auto flex items-center">
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="fas fa-star text-yellow-400"></i>
+            <i class="far fa-star text-yellow-400"></i><!--Empty star-->
+          </div>
+        </div>
+        <!--Comments-->
+        <div class="client-comment p-4">
+          <p>Placement Experience: Yes, there are placement drives in the college. Students who are enrolled in the final year are eligible for campus drives. The average package of the college is 4.5 lakh. Many companies come here throughout the year. Some are core companies and some are IT companies.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer id="footer" class=" text-black py-8">
+  <div class="mx-4 sm:mx-8 lg:mx-20">
+    <div class="flex flex-col md:flex-row md:justify-between md:items-start">
+      <!-- Company Info -->
+      <div class="mb-6 md:mb-0">
+        <h2 class="text-xl font-semibold mb-4">CollegeQuest</h2>
+        <p class="mb-4">Your trusted partner in finding the perfect college and scholarship opportunities.</p>
+        <div class="text-lg mb-2">© 2024 CollegeQuest</div>
+        <div class="text-lg mb-2">+918237742040</div>
+        <div class="text-lg">gopalgawas2004@gmail.com</div>
+      </div>
+      
+      <!-- Quick Links -->
+      <div class="mb-6 md:mb-0">
+        <h2 class="text-xl font-semibold mb-4">Quick Links</h2>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-blue-600">Home</a></li>
+          <li><a href="#" class="hover:text-blue-600">Services</a></li>
+          <li><a href="#" class="hover:text-blue-600">Reviews</a></li>
+          <li><a href="#" class="hover:text-blue-600">Contact</a></li>
+          <li><a href="#" class="hover:text-blue-600">About Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Media Links -->
+      <div>
+        <h2 class="text-xl font-semibold mb-4">Follow Us</h2>
+        <div class="flex space-x-4 text-2xl">
+          <a href="https://instagram.com" target="_blank" class="hover:text-blue-300">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://facebook.com" target="_blank" class="hover:text-blue-300">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" class="hover:text-blue-300">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://youtube.com" target="_blank" class="hover:text-blue-300">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+<script src="info.js"></script>
+</html> 
