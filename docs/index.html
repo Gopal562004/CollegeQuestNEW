@@ -441,7 +441,18 @@
     </div>
   </div>
 </footer>
+  <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('./sw.js')
+        .then(() => console.log('Service Worker Registered'))
+        .catch((err) => console.error('SW registration failed:', err));
+    });
+  }
+</script>
+
 </body>
+  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 <script src="index.js"></script>
 
