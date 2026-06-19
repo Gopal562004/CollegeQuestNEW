@@ -276,6 +276,13 @@
 
   function renderSearchedCollege(collegeData, collegeId) {
     const collegeDetails = document.getElementById("collegeDetails");
+    const safeArray = (val) => Array.isArray(val) ? val : (val ? Object.values(val) : []);
+    const cutoffsList = safeArray(collegeData.cutoffs);
+    const galleryList = safeArray(collegeData.gallery);
+    const facultyList = safeArray(collegeData.faculty);
+    const newsList = safeArray(collegeData.news);
+    const qaList = safeArray(collegeData.qa);
+    const facilitiesList = safeArray(collegeData.facilities).length > 0 ? safeArray(collegeData.facilities) : ['Library', 'Cafeteria', 'Hostel', 'Sports Complex', 'Gym', 'Wi-Fi Campus', 'Auditorium', 'Labs'];
 
     let coursesHtml = '';
     for(let i=1; i<=6; i++) {
@@ -465,13 +472,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                    ${(collegeData.cutoffs || []).map(c => `
+                    ${cutoffsList.map(c => `
                     <tr class="border-b-hard last:border-b-0 hover:bg-black hover:text-white transition-colors">
                       <td class="p-4 font-bold border-r-hard">${c.course}</td>
                       <td class="p-4 font-medium border-r-hard">${c.category}</td>
                       <td class="p-4 font-bold">${c.percentile}</td>
                     </tr>`).join('')}
-                    ${!collegeData.cutoffs ? `<tr><td colspan="3" class="p-8 text-center text-muted font-bold uppercase">Cutoff data not available</td></tr>` : ''}
+                    ${cutoffsList.length === 0 ? `<tr><td colspan="3" class="p-8 text-center text-muted font-bold uppercase">Cutoff data not available</td></tr>` : ''}
                   </tbody>
                 </table>
               </div>
@@ -502,7 +509,7 @@
               <h2 class="text-3xl font-black uppercase tracking-tight">Campus Facilities</h2>
             </div>
             <div class="p-8 flex flex-wrap gap-4">
-              ${(collegeData.facilities || ['Library', 'Cafeteria', 'Hostel', 'Sports Complex', 'Gym', 'Wi-Fi Campus', 'Auditorium', 'Labs']).map(fac => 
+              ${facilitiesList.map(fac => 
                 `<div class="border-hard px-6 py-3 font-bold uppercase tracking-widest text-sm bg-white hover:bg-black hover:text-white transition-colors cursor-default shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1">
                   ${fac}
                  </div>`
@@ -516,10 +523,10 @@
               <h2 class="text-3xl font-black uppercase tracking-tight">Gallery</h2>
             </div>
             <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-              ${(collegeData.gallery || []).map(url => `
+              ${galleryList.map(url => `
                 <div class="border-hard shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] h-48 bg-cover bg-center hover:scale-[1.02] transition-transform" style="background-image: url('${url}')"></div>
               `).join('')}
-              ${!collegeData.gallery ? `<div class="text-muted font-bold uppercase col-span-2">No images available</div>` : ''}
+              ${galleryList.length === 0 ? `<div class="text-muted font-bold uppercase col-span-2">No images available</div>` : ''}
             </div>
           </section>
 
@@ -537,13 +544,13 @@
               <h2 class="text-3xl font-black uppercase tracking-tight">Faculty</h2>
             </div>
             <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-              ${(collegeData.faculty || []).map(f => `
+              ${facultyList.map(f => `
                 <div class="border-hard p-6 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                   <h4 class="font-black text-xl mb-2">${f.name}</h4>
                   <div class="text-muted text-sm uppercase tracking-widest font-bold">${f.role} • ${f.dept}</div>
                 </div>
               `).join('')}
-              ${!collegeData.faculty ? `<div class="text-muted font-bold uppercase col-span-2">Faculty details not available</div>` : ''}
+              ${facultyList.length === 0 ? `<div class="text-muted font-bold uppercase col-span-2">Faculty details not available</div>` : ''}
             </div>
           </section>
 
@@ -553,13 +560,13 @@
               <h2 class="text-3xl font-black uppercase tracking-tight">News & Articles</h2>
             </div>
             <div class="p-8 flex flex-col gap-6">
-              ${(collegeData.news || []).map(n => `
+              ${newsList.map(n => `
                 <div class="border-b-hard pb-4 last:border-b-0 last:pb-0 hover:translate-x-2 transition-transform cursor-pointer">
                   <h4 class="font-bold text-xl">${n.title}</h4>
                   <div class="text-muted text-sm uppercase tracking-widest font-bold mt-2">${n.date}</div>
                 </div>
               `).join('')}
-              ${!collegeData.news ? `<div class="text-muted font-bold uppercase">No recent news</div>` : ''}
+              ${newsList.length === 0 ? `<div class="text-muted font-bold uppercase">No recent news</div>` : ''}
             </div>
           </section>
 
@@ -582,7 +589,7 @@
                 </div>
                 <h4 class="font-bold uppercase mb-4 tracking-widest text-sm border-b-hard pb-2">Amenities</h4>
                 <div class="flex flex-wrap gap-3">
-                  ${collegeData.hostel.amenities.map(a => `<div class="border-hard px-4 py-2 text-sm bg-black text-white font-bold uppercase tracking-widest">${a}</div>`).join('')}
+                  ${safeArray(collegeData.hostel.amenities).map(a => `<div class="border-hard px-4 py-2 text-sm bg-black text-white font-bold uppercase tracking-widest">${a}</div>`).join('')}
                 </div>
               ` : `<div class="text-muted font-bold uppercase">Hostel data not available</div>`}
             </div>
@@ -594,13 +601,13 @@
               <h2 class="text-3xl font-black uppercase tracking-tight">Q&A</h2>
             </div>
             <div class="p-8 flex flex-col gap-8">
-              ${(collegeData.qa || []).map(qa => `
+              ${qaList.map(qa => `
                 <div class="border-l-4 border-black pl-4">
                   <h4 class="font-black text-xl mb-2">Q: ${qa.q}</h4>
                   <div class="text-muted font-medium text-lg">A: ${qa.a}</div>
                 </div>
               `).join('')}
-              ${!collegeData.qa ? `<div class="text-muted font-bold uppercase">No Q&A available</div>` : ''}
+              ${qaList.length === 0 ? `<div class="text-muted font-bold uppercase">No Q&A available</div>` : ''}
             </div>
           </section>
 
