@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COLLEGEQUEST</title>
+  <link rel="icon" href="./images/logob.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            accent: '#000000',
+            bg: '#ffffff',
+            text: '#000000',
+            muted: '#6b7280',
+            surface: '#f9fafb'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Ultra-modern minimalist resets */
+    body {
+      background-color: #ffffff;
+      color: #000000;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    .border-hard {
+      border: 2px solid #000000;
+    }
+    
+    .border-b-hard {
+      border-bottom: 2px solid #000000;
+    }
+    
+    .border-t-hard {
+      border-top: 2px solid #000000;
+    }
+
+    .border-r-hard {
+      border-right: 2px solid #000000;
+    }
+
+    .border-l-hard {
+      border-left: 2px solid #000000;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      background-color: rgba(0,0,0,0.8);
+      backdrop-filter: blur(4px);
+    }
+  </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col">
+
+<!-- Navigation -->
+<nav class="w-full border-b-hard bg-bg sticky top-0 z-50">
+  <div class="flex justify-between items-stretch h-16">
+    <!-- Logo -->
+    <a href="index.html" class="flex items-center px-6 border-r-hard font-black text-2xl tracking-tighter uppercase hover:bg-black hover:text-white transition-colors">
+      COLLEGEQUEST
+    </a>
+    
+    <!-- Desktop Links -->
+    <div class="hidden md:flex flex-grow">
+      <a href="#" onclick="toggleModal('search-modal'); return false;" class="flex items-center justify-center px-8 border-r-hard font-bold text-sm uppercase tracking-wide hover:bg-black hover:text-white transition-colors">Search</a>
+      <a href="#services" class="flex items-center justify-center px-8 border-r-hard font-bold text-sm uppercase tracking-wide hover:bg-black hover:text-white transition-colors">Services</a>
+      <a href="#reviews" class="flex items-center justify-center px-8 border-r-hard font-bold text-sm uppercase tracking-wide hover:bg-black hover:text-white transition-colors">Reviews</a>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex">
+      <button onclick="toggleModal('search-modal')" class="flex items-center justify-center px-6 border-l-hard hover:bg-black hover:text-white transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      </button>
+      <button onclick="toggleModal('auth-modal')" class="hidden md:flex items-center justify-center px-8 border-l-hard bg-black text-white font-bold text-sm uppercase tracking-wide hover:bg-surface hover:text-black transition-colors">
+        Login / Register
+      </button>
+      <!-- Mobile Menu Button -->
+      <button onclick="toggleMobileMenu()" class="md:hidden flex items-center justify-center px-6 border-l-hard hover:bg-black hover:text-white transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Mobile Menu Dropdown -->
+  <div id="mobile-menu" class="hidden flex-col border-t-hard bg-bg">
+    <a href="#" onclick="toggleModal('search-modal'); toggleMobileMenu(); return false;" class="p-4 border-b-hard font-bold uppercase hover:bg-black hover:text-white">Search</a>
+    <a href="#services" class="p-4 border-b-hard font-bold uppercase hover:bg-black hover:text-white">Services</a>
+    <a href="#reviews" class="p-4 border-b-hard font-bold uppercase hover:bg-black hover:text-white">Reviews</a>
+    <button onclick="toggleModal('auth-modal'); toggleMobileMenu();" class="p-4 bg-black text-white font-bold uppercase text-left w-full">Login / Register</button>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="flex-grow flex flex-col md:flex-row border-b-hard">
+  <div class="flex-1 flex flex-col justify-center p-8 md:p-16 lg:p-24 border-b-hard md:border-b-0 md:border-r-hard">
+    <h1 class="text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-none mb-8">
+      FIND<br>YOUR<br>FUTURE
+    </h1>
+    <p class="text-lg md:text-xl max-w-lg mb-12 font-medium text-muted">
+      The ultimate, data-driven college discovery engine. Brutally precise matching for the uncompromising student.
+    </p>
+    <div>
+      <button onclick="toggleModal('search-modal')" class="border-hard bg-black text-white px-8 py-4 font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-colors">
+        Start Searching
+      </button>
+    </div>
+  </div>
+  
+  <!-- Massive Typography / Abstract Art area -->
+  <div class="flex-1 bg-surface flex items-center justify-center p-8 relative overflow-hidden">
+    <div class="absolute -right-20 -bottom-20 text-[20rem] font-black text-black opacity-5 leading-none pointer-events-none">
+      CQ
+    </div>
+    <div class="border-hard bg-white p-8 max-w-sm w-full transform -rotate-3 hover:rotate-0 transition-transform duration-500 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <div class="text-xs uppercase font-bold tracking-widest border-b-hard pb-4 mb-4">Quick Stats</div>
+      <div class="flex justify-between items-end border-b-hard pb-4 mb-4">
+        <span class="text-4xl font-black">5,000+</span>
+        <span class="text-sm font-bold uppercase">Colleges</span>
+      </div>
+      <div class="flex justify-between items-end">
+        <span class="text-4xl font-black">1M+</span>
+        <span class="text-sm font-bold uppercase">Scholarships</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Marquee Divider -->
+<div class="border-b-hard bg-black text-white overflow-hidden whitespace-nowrap py-3 flex items-center">
+  <div class="animate-[marquee_20s_linear_infinite] inline-block font-bold uppercase tracking-widest text-sm">
+    <span class="mx-4">DISCOVER</span> • 
+    <span class="mx-4">ANALYZE</span> • 
+    <span class="mx-4">COMPARE</span> • 
+    <span class="mx-4">APPLY</span> • 
+    <span class="mx-4">DISCOVER</span> • 
+    <span class="mx-4">ANALYZE</span> • 
+    <span class="mx-4">COMPARE</span> • 
+    <span class="mx-4">APPLY</span> • 
+    <span class="mx-4">DISCOVER</span> • 
+    <span class="mx-4">ANALYZE</span> • 
+    <span class="mx-4">COMPARE</span> • 
+    <span class="mx-4">APPLY</span> •
+    <span class="mx-4">DISCOVER</span> • 
+    <span class="mx-4">ANALYZE</span> • 
+    <span class="mx-4">COMPARE</span> • 
+    <span class="mx-4">APPLY</span>
+  </div>
+</div>
+
+<style>
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+</style>
+
+<!-- Services Grid -->
+<section id="services" class="border-b-hard flex flex-col md:flex-row">
+  <div class="w-full md:w-1/3 border-b-hard md:border-b-0 md:border-r-hard p-12 bg-surface flex flex-col">
+    <div class="w-12 h-12 border-hard flex items-center justify-center font-black text-2xl mb-8">01</div>
+    <h2 class="text-3xl font-black uppercase tracking-tight mb-4">Smart Search</h2>
+    <p class="font-medium text-muted mb-8 flex-grow">A brutally fast search engine slicing through thousands of data points to find exact matches.</p>
+    <a href="#" class="font-bold uppercase tracking-wider text-sm border-b-2 border-black inline-block self-start hover:text-white hover:bg-black transition-colors">Explore</a>
+  </div>
+  
+  <div class="w-full md:w-1/3 border-b-hard md:border-b-0 md:border-r-hard p-12 bg-white flex flex-col">
+    <div class="w-12 h-12 border-hard flex items-center justify-center font-black text-2xl mb-8 bg-black text-white">02</div>
+    <h2 class="text-3xl font-black uppercase tracking-tight mb-4">Vast Database</h2>
+    <p class="font-medium text-muted mb-8 flex-grow">Unfiltered access to comprehensive statistics, placement records, and honest reviews.</p>
+    <a href="#" class="font-bold uppercase tracking-wider text-sm border-b-2 border-black inline-block self-start hover:text-white hover:bg-black transition-colors">Explore</a>
+  </div>
+  
+  <div class="w-full md:w-1/3 p-12 bg-surface flex flex-col">
+    <div class="w-12 h-12 border-hard flex items-center justify-center font-black text-2xl mb-8">03</div>
+    <h2 class="text-3xl font-black uppercase tracking-tight mb-4">Scholarships</h2>
+    <p class="font-medium text-muted mb-8 flex-grow">Match with funding opportunities that actually fit your profile. No fluff, just results.</p>
+    <a href="#" class="font-bold uppercase tracking-wider text-sm border-b-2 border-black inline-block self-start hover:text-white hover:bg-black transition-colors">Explore</a>
+  </div>
+</section>
+
+<!-- Big Statement -->
+<section class="border-b-hard py-24 px-8 bg-black text-white text-center">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-tight mb-8">
+      NO COMPROMISES. NO FLUFF. JUST THE DATA YOU NEED TO MAKE THE BIGGEST DECISION OF YOUR LIFE.
+    </h2>
+    <button onclick="toggleModal('search-modal')" class="border-2 border-white bg-transparent text-white px-8 py-4 font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-colors">
+      Begin Quest
+    </button>
+  </div>
+</section>
+
+<!-- Minimalist Reviews -->
+<section id="reviews" class="border-b-hard">
+  <div class="border-b-hard p-6 bg-surface">
+    <h2 class="text-2xl font-black uppercase tracking-tight">Testimonials</h2>
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+    <!-- Review 1 -->
+    <div class="border-b-hard lg:border-b-0 lg:border-r-hard p-8 flex flex-col">
+      <div class="font-black text-4xl mb-4">"</div>
+      <p class="font-medium text-lg flex-grow mb-8">Incredibly intuitive. I found my dream school without any stress.</p>
+      <div class="border-t-hard pt-4 mt-auto flex justify-between items-end">
+        <div>
+          <div class="font-bold uppercase">Sarah T.</div>
+          <div class="text-xs text-muted uppercase font-bold tracking-wider">CS Major</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Review 2 -->
+    <div class="border-b-hard lg:border-b-0 lg:border-r-hard p-8 flex flex-col bg-surface">
+      <div class="font-black text-4xl mb-4">"</div>
+      <p class="font-medium text-lg flex-grow mb-8">Spot on matches. I couldn't be happier. Highly recommend to every senior.</p>
+      <div class="border-t-hard pt-4 mt-auto flex justify-between items-end">
+        <div>
+          <div class="font-bold uppercase">Jason M.</div>
+          <div class="text-xs text-muted uppercase font-bold tracking-wider">Business</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Review 3 -->
+    <div class="border-b-hard md:border-b-0 lg:border-r-hard p-8 flex flex-col">
+      <div class="font-black text-4xl mb-4">"</div>
+      <p class="font-medium text-lg flex-grow mb-8">Gorgeous interface. Secured a scholarship covering half my tuition.</p>
+      <div class="border-t-hard pt-4 mt-auto flex justify-between items-end">
+        <div>
+          <div class="font-bold uppercase">Emily J.</div>
+          <div class="text-xs text-muted uppercase font-bold tracking-wider">Engineering</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Review 4 -->
+    <div class="p-8 flex flex-col bg-surface">
+      <div class="font-black text-4xl mb-4">"</div>
+      <p class="font-medium text-lg flex-grow mb-8">Top-notch platform. Comparing colleges was a breeze.</p>
+      <div class="border-t-hard pt-4 mt-auto flex justify-between items-end">
+        <div>
+          <div class="font-bold uppercase">Michael W.</div>
+          <div class="text-xs text-muted uppercase font-bold tracking-wider">Freshman</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-black text-white p-8 md:p-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+  <div>
+    <div class="text-4xl font-black uppercase tracking-tighter mb-4">COLLEGEQUEST</div>
+    <p class="font-medium text-gray-400 max-w-sm">The ultimate platform for college search and scholarship matching.</p>
+  </div>
+  
+  <div class="text-left md:text-right">
+    <div class="flex gap-6 mb-4 md:justify-end">
+      <a href="#" class="font-bold uppercase tracking-widest text-sm hover:text-gray-400">Instagram</a>
+      <a href="#" class="font-bold uppercase tracking-widest text-sm hover:text-gray-400">Twitter</a>
+      <a href="#" class="font-bold uppercase tracking-widest text-sm hover:text-gray-400">LinkedIn</a>
+    </div>
+    <div class="text-xs text-gray-500 uppercase tracking-widest">© 2024 CollegeQuest. All Rights Reserved.</div>
+  </div>
+</footer>
+
+<!-- Modals -->
+
+<!-- Full-Screen Search Modal -->
+<div id="search-modal" class="fixed inset-0 z-[100] hidden modal-overlay items-center justify-center p-4">
+  <div class="w-full max-w-4xl bg-white border-hard shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+    <div class="flex justify-between items-center border-b-hard p-4 bg-surface">
+      <div class="font-black uppercase tracking-widest">Search Database</div>
+      <button onclick="toggleModal('search-modal')" class="hover:bg-black hover:text-white px-2 py-1 font-bold">X</button>
+    </div>
+    <div class="p-8 md:p-16">
+      <input 
+        type="text" 
+        id="search" 
+        class="w-full border-b-hard text-4xl md:text-6xl font-black uppercase focus:outline-none focus:border-b-4 placeholder-gray-300 pb-4" 
+        placeholder="ENTER COLLEGE..."
+        onkeypress="handleKeyPress(event)"
+        autocomplete="off"
+      >
+      <p class="mt-8 font-bold text-muted uppercase tracking-widest text-sm">Suggestions: St. John, Vidyavardhini, Mumbai University</p>
+    </div>
+  </div>
+</div>
+
+<!-- Auth Modal -->
+<div id="auth-modal" class="fixed inset-0 z-[100] hidden modal-overlay items-center justify-center p-4">
+  <div class="w-full max-w-md bg-white border-hard shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+    <div class="flex justify-between items-center border-b-hard p-4 bg-black text-white">
+      <div class="font-black uppercase tracking-widest" id="auth-title">Login</div>
+      <button onclick="toggleModal('auth-modal')" class="hover:bg-white hover:text-black px-2 py-1 font-bold">X</button>
+    </div>
+    
+    <div class="p-8" id="auth-form-container">
+      <form class="flex flex-col gap-6">
+        <div>
+          <label class="block font-bold uppercase tracking-widest text-sm mb-2">Email</label>
+          <input type="email" class="w-full border-hard p-3 font-medium focus:bg-surface" placeholder="EMAIL@EXAMPLE.COM" required>
+        </div>
+        <div>
+          <label class="block font-bold uppercase tracking-widest text-sm mb-2">Password</label>
+          <input type="password" class="w-full border-hard p-3 font-medium focus:bg-surface" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="w-full border-hard bg-black text-white p-4 font-black uppercase tracking-widest hover:bg-surface hover:text-black transition-colors mt-4">
+          Authenticate
+        </button>
+      </form>
+      <button onclick="toggleAuthMode()" class="mt-6 w-full text-center font-bold text-sm uppercase tracking-widest text-muted hover:text-black">
+        Switch to Register ->
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleModal(id) {
+    const modal = document.getElementById(id);
+    if (modal.classList.contains('hidden')) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      if(id === 'search-modal') {
+        setTimeout(() => document.getElementById('search').focus(), 100);
+      }
+    } else {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  }
+
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+    menu.classList.toggle('flex');
+  }
+
+  let isLogin = true;
+  function toggleAuthMode() {
+    isLogin = !isLogin;
+    document.getElementById('auth-title').innerText = isLogin ? 'Login' : 'Register';
+    event.target.innerText = isLogin ? 'Switch to Register ->' : '<- Switch to Login';
+  }
+
+  function handleKeyPress(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const searchTerm = document.getElementById('search').value.trim();
+      if (searchTerm) {
+        window.location.href = `testing.html?key=${encodeURIComponent(searchTerm)}`;
+      }
+    }
+  }
+</script>
+
+</body>
+</html>

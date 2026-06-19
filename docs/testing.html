@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>COLLEGE SEARCH RESULTS - COLLEGEQUEST</title>
+  <link rel="icon" href="./images/logob.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            accent: '#000000',
+            bg: '#ffffff',
+            text: '#000000',
+            muted: '#6b7280',
+            surface: '#f9fafb'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #000000;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    .border-hard { border: 2px solid #000000; }
+    .border-b-hard { border-bottom: 2px solid #000000; }
+    .border-t-hard { border-top: 2px solid #000000; }
+    .border-r-hard { border-right: 2px solid #000000; }
+    .border-l-hard { border-left: 2px solid #000000; }
+    
+    /* Table styles */
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; padding: 1rem; border-bottom: 2px solid #000; text-transform: uppercase; font-weight: 900; letter-spacing: 0.05em; font-size: 0.875rem; background: #000; color: #fff;}
+    td { padding: 1rem; border-bottom: 1px solid #000; font-weight: 500;}
+
+    /* Loader */
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #000000;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col">
+
+<div id="collegeDetails" class="flex-grow flex flex-col">
+  <div class="flex-grow flex flex-col items-center justify-center bg-surface">
+    <div class="spinner mb-6"></div>
+    <div class="font-black text-2xl uppercase tracking-widest">Searching Database...</div>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDPqF6iiONiN6WEGsv6GtyPDaPK8b_1ROc",
+    authDomain: "collegequest-101dc.firebaseapp.com",
+    databaseURL: "https://collegequest-101dc-default-rtdb.firebaseio.com",
+    projectId: "collegequest-101dc",
+    storageBucket: "collegequest-101dc.appspot.com",
+    messagingSenderId: "900326719034",
+    appId: "1:900326719034:web:4a4b48ecfb2d927bfd7f03",
+    measurementId: "G-BY25JWXVWJ"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+
+  function searchColleges() {
+    const searchParams = new URLSearchParams(window.location.search);
+    const key = searchParams.get("key");
+
+    if (key) {
+      const searchInput = key.toLowerCase();
+      const collegesRef = ref(database, "colleges");
+
+      onValue(collegesRef, (snapshot) => {
+        const data = snapshot.val();
+        let searchedCollege = null;
+        for (const collegeKey in data) {
+          const college = data[collegeKey];
+          if (collegeKey.toLowerCase().includes(searchInput)) {
+            searchedCollege = college;
+            break;
+          }
+        }
+
+        if (searchedCollege) {
+          renderSearchedCollege(searchedCollege);
+        } else {
+          renderError("NOT FOUND", "College not found in our database.");
+        }
+      });
+    } else {
+      renderError("ERROR", "No search query provided.");
+    }
+  }
+
+  function renderError(title, message) {
+    document.getElementById("collegeDetails").innerHTML = `
+      <div class="flex-grow flex flex-col items-center justify-center bg-surface p-8 text-center">
+        <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-6">${title}</h1>
+        <p class="font-bold text-xl mb-8">${message}</p>
+        <button onclick="window.location.href='index.html'" class="border-hard bg-black text-white px-8 py-4 font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-colors shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-2 hover:translate-y-2">
+          RETURN TO SEARCH
+        </button>
+      </div>
+    `;
+  }
+
+  function initializeChart(collegeData) {
+    setTimeout(() => {
+      var canvas = document.getElementById("lineChart");
+      if(canvas) {
+        var ctx = canvas.getContext("2d");
+        new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: ["'18", "'20", "'22", "'24"],
+            datasets: [{
+              label: "Placement Rate / Avg Package",
+              data: [
+                parseFloat(collegeData.placement?.y2014 || collegeData.placement?.y2016 || "3.5"),
+                parseFloat(collegeData.placement?.y2017 || collegeData.placement?.y2020 || "3.8"),
+                parseFloat(collegeData.placement?.y2018 || collegeData.placement?.y2021 || "4.2"),
+                parseFloat(collegeData.placement?.y2022 || collegeData.placement?.y2024 || "4.8"),
+              ],
+              borderColor: "#000000",
+              backgroundColor: "rgba(0,0,0,0.1)",
+              borderWidth: 4,
+              pointBackgroundColor: "#ffffff",
+              pointBorderColor: "#000000",
+              pointBorderWidth: 3,
+              pointRadius: 6,
+              pointHoverRadius: 8,
+              fill: true,
+              tension: 0
+            }],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { 
+                beginAtZero: true,
+                grid: { color: "#e5e7eb" },
+                ticks: { font: { family: "Inter", weight: "bold" }, color: "#000" }
+              },
+              x: {
+                grid: { display: false },
+                ticks: { font: { family: "Inter", weight: "bold" }, color: "#000" }
+              }
+            }
+          }
+        });
+      }
+    }, 500);
+  }
+
+  function renderSearchedCollege(collegeData) {
+    const collegeDetails = document.getElementById("collegeDetails");
+
+    let coursesHtml = '';
+    for(let i=1; i<=6; i++) {
+      const course = collegeData.courses?.[`c${i}`];
+      if(course) {
+        coursesHtml += `
+          <div class="border-hard p-6 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all">
+            <h4 class="font-black text-xl mb-4 border-b-hard pb-4 uppercase">${course.name}</h4>
+            <div class="flex justify-between items-center mb-2 font-medium text-sm"><span class="text-muted uppercase tracking-wider">Seats</span> <span class="font-bold">${course.seat}</span></div>
+            <div class="flex justify-between items-center mb-2 font-medium text-sm"><span class="text-muted uppercase tracking-wider">Exams</span> <span class="font-bold">JEE / MHT CET</span></div>
+            <div class="flex justify-between items-center mb-6 font-medium text-sm"><span class="text-muted uppercase tracking-wider">Duration</span> <span class="font-bold">4 Years</span></div>
+            <div class="mt-auto border-t-hard pt-4 flex justify-between items-end">
+              <div class="font-black text-xl">₹ ${collegeData.fees || 'N/A'} <span class="text-xs font-bold text-muted">/YR</span></div>
+              <button class="uppercase font-bold text-xs tracking-widest border-b-2 border-black hover:bg-black hover:text-white transition-colors">Details</button>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    let reviewsHtml = '';
+    for(let i=1; i<=4; i++) {
+      const review = collegeData.reviews?.[`r${i}`];
+      if(review) {
+        reviewsHtml += `
+          <div class="p-8 border-b-hard ${i%2!==0 ? 'md:border-r-hard bg-white' : 'bg-surface'} flex flex-col">
+            <div class="font-black text-4xl mb-4 text-gray-300 leading-none">"</div>
+            <p class="font-medium text-base flex-grow mb-8">${review.review || 'No review text provided.'}</p>
+            <div class="border-t-hard pt-4 mt-auto">
+              <div class="font-bold uppercase tracking-widest text-sm">${review.username || 'Anonymous'}</div>
+              <div class="text-xs text-muted uppercase font-bold tracking-wider">Verified Student</div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    collegeDetails.innerHTML = `
+      <!-- Navigation -->
+      <nav class="w-full border-b-hard bg-bg sticky top-0 z-50">
+        <div class="flex justify-between items-stretch h-16">
+          <a href="index.html" class="flex items-center px-6 border-r-hard font-black text-2xl tracking-tighter uppercase hover:bg-black hover:text-white transition-colors">
+            COLLEGEQUEST
+          </a>
+          <div class="flex flex-grow justify-end">
+            <a href="index.html" class="flex items-center justify-center px-8 border-l-hard font-bold text-sm uppercase tracking-wide hover:bg-black hover:text-white transition-colors">BACK TO SEARCH</a>
+            <button class="hidden md:flex items-center justify-center px-8 border-l-hard bg-black text-white font-bold text-sm uppercase tracking-wide hover:bg-surface hover:text-black transition-colors">
+              Login
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- College Header -->
+      <header class="border-b-hard flex flex-col md:flex-row bg-surface">
+        <div class="w-full md:w-1/3 border-b-hard md:border-b-0 md:border-r-hard p-12 flex items-center justify-center bg-white">
+          <div class="w-48 h-48 border-hard shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-4 bg-white flex items-center justify-center">
+            <img src="${collegeData.images?.logo || './images/st.jpeg'}" alt="College Logo" class="max-w-full max-h-full object-contain">
+          </div>
+        </div>
+        <div class="w-full md:w-2/3 p-12 flex flex-col justify-center">
+          <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-6">${collegeData.name || 'College Name'}</h1>
+          <div class="flex flex-wrap gap-4 mb-8">
+            <div class="border-hard px-4 py-2 font-bold uppercase tracking-widest text-sm bg-black text-white">Private Institution</div>
+            <div class="border-hard px-4 py-2 font-bold uppercase tracking-widest text-sm bg-white">Rating: 4.5/5</div>
+          </div>
+          <div class="flex gap-4">
+            <button class="border-hard bg-black text-white px-8 py-3 font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1">
+              Download Brochure
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Marquee Divider -->
+      <div class="border-b-hard bg-black text-white overflow-hidden whitespace-nowrap py-2 flex items-center">
+        <div class="animate-[marquee_15s_linear_infinite] inline-block font-bold uppercase tracking-widest text-xs">
+          <span class="mx-4">ENGINEERING</span> • 
+          <span class="mx-4">MANAGEMENT</span> • 
+          <span class="mx-4">AICTE APPROVED</span> • 
+          <span class="mx-4">TOP PLACEMENTS</span> •
+          <span class="mx-4">ENGINEERING</span> • 
+          <span class="mx-4">MANAGEMENT</span> • 
+          <span class="mx-4">AICTE APPROVED</span> • 
+          <span class="mx-4">TOP PLACEMENTS</span> •
+          <span class="mx-4">ENGINEERING</span> • 
+          <span class="mx-4">MANAGEMENT</span> • 
+          <span class="mx-4">AICTE APPROVED</span> • 
+          <span class="mx-4">TOP PLACEMENTS</span>
+        </div>
+      </div>
+
+      <!-- Main Content Grid -->
+      <div class="flex flex-col lg:flex-row flex-grow">
+        
+        <!-- Left Column -->
+        <main class="w-full lg:w-2/3 border-b-hard lg:border-b-0 lg:border-r-hard">
+          <!-- About -->
+          <section class="border-b-hard p-8 md:p-12">
+            <h2 class="text-3xl font-black uppercase tracking-tight mb-6">About</h2>
+            <p class="font-medium text-lg leading-relaxed text-muted">
+              ${collegeData.description || 'Information not available.'}
+            </p>
+          </section>
+
+          <!-- Courses & Fees -->
+          <section class="border-b-hard">
+            <div class="p-8 border-b-hard bg-surface">
+              <h2 class="text-3xl font-black uppercase tracking-tight">Courses & Fees</h2>
+            </div>
+            <div class="p-8">
+              <div class="border-hard mb-12 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Course</th>
+                      <th>1st Year Fees</th>
+                      <th>Eligibility</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="font-bold">B.E. / B.Tech</td>
+                      <td>₹ ${collegeData.fees || 'N/A'}</td>
+                      <td>10+2: 45% | JEE Main, MHT CET</td>
+                    </tr>
+                    <tr>
+                      <td class="font-bold">MBA / PGDM</td>
+                      <td>₹ 1,40,000</td>
+                      <td>Graduation: 50% | MAT, XAT</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3 class="text-xl font-black uppercase tracking-widest mb-6">Specializations</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                ${coursesHtml}
+              </div>
+            </div>
+          </section>
+
+          <!-- Reviews -->
+          <section>
+            <div class="p-8 border-b-hard flex justify-between items-center bg-black text-white">
+              <h2 class="text-2xl font-black uppercase tracking-tight">Student Reviews</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2">
+              ${reviewsHtml || '<div class="p-8 font-bold">No reviews yet.</div>'}
+            </div>
+          </section>
+        </main>
+
+        <!-- Right Column -->
+        <aside class="w-full lg:w-1/3 flex flex-col bg-surface">
+          <!-- Placements -->
+          <div class="border-b-hard p-8 flex-1">
+            <h2 class="text-2xl font-black uppercase tracking-tight mb-6">Placements</h2>
+            <div class="border-hard bg-white p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] mb-6">
+              <div class="relative h-64 w-full">
+                <canvas id="lineChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <!-- Location -->
+          <div class="p-8 flex-1 border-b-hard lg:border-b-0">
+            <h2 class="text-2xl font-black uppercase tracking-tight mb-6">Location</h2>
+            <div class="border-hard bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] h-64 relative overflow-hidden grayscale hover:grayscale-0 transition-all duration-500">
+              ${collegeData.location || '<div class="flex items-center justify-center h-full font-bold uppercase text-muted">Map not available</div>'}
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Footer -->
+      <footer class="bg-black text-white p-8 border-t-hard flex justify-between items-center mt-auto">
+        <div class="text-2xl font-black uppercase tracking-tighter">COLLEGEQUEST</div>
+        <div class="text-xs font-bold uppercase tracking-widest text-gray-500">© 2024</div>
+      </footer>
+    `;
+    initializeChart(collegeData);
+  }
+
+  searchColleges();
+</script>
+</body>
+</html>
