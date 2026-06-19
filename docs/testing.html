@@ -260,7 +260,20 @@
           const collegeId = querySnapshot.docs[0].id;
           renderSearchedCollege(searchedCollege, collegeId);
         } else {
-          renderError("NOT FOUND", "College not found in our database.");
+          const allColleges = await getDocs(collection(db, "colleges"));
+          let found = null;
+          let foundId = null;
+          allColleges.forEach(doc => {
+            if (!found && (doc.data().name || doc.id).toLowerCase().includes(searchInput)) {
+              found = doc.data();
+              foundId = doc.id;
+            }
+          });
+          if (found) {
+            renderSearchedCollege(found, foundId);
+          } else {
+            renderError("NOT FOUND", "College not found in our database.");
+          }
         }
       } catch (error) {
         console.error("Error fetching from Firestore:", error);
