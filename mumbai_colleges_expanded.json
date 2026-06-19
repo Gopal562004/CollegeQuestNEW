@@ -1,0 +1,674 @@
+{
+  "colleges": {
+    "VJTI - Veeramata Jijabai Technological Institute": {
+      "name": "Veeramata Jijabai Technological Institute - [VJTI]",
+      "description": "Veermata Jijabai Technological Institute established in 1887, formerly known as Victoria Jubilee Technical Institute is an autonomous institution owned by Maharashtra State Government approved by AICTE. It is one of the oldest engineering colleges in Asia. The institute is ranked 84 in engineering category By NIRF. The college offers various UG, PG, Diploma and doctoral courses and provides admission to courses based on entrance exams such as MHT CET, GATE, UGC NET.",
+      "fees": "85551",
+      "images": {
+        "logo": "https://vjti.ac.in/wp-content/uploads/2021/08/vjti_logo.png"
+      },
+      "location": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.865427181313!2d72.85350331535492!3d19.025345987116524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7cf26f4972d21%3A0x2c50185364aca4c1!2sVeeramata%20Jijabai%20Technological%20Institute%20(VJTI)!5e0!3m2!1sen!2sin!4v1628151234567!5m2!1sen!2sin\" width=\"100%\" height=\"100%\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>",
+      "placement": {
+        "y2021": "11.0",
+        "y2022": "12.5",
+        "y2023": "14.5",
+        "y2024": "16.0"
+      },
+      "courses": {
+        "c1": {
+          "name": "B.Tech Computer Engineering",
+          "seat": 60,
+          "exams": "MHT CET / JEE",
+          "duration": "4 Years",
+          "fees": "85551"
+        },
+        "c2": {
+          "name": "B.Tech Information Technology",
+          "seat": 60,
+          "exams": "MHT CET / JEE",
+          "duration": "4 Years",
+          "fees": "85551"
+        },
+        "c3": {
+          "name": "B.Tech Electronics and Telecommunication",
+          "seat": 60,
+          "exams": "MHT CET / JEE",
+          "duration": "4 Years",
+          "fees": "85551"
+        },
+        "c4": {
+          "name": "MBA / PGDM",
+          "seat": 60,
+          "exams": "MAH CET / CAT",
+          "duration": "2 Years",
+          "fees": "140000"
+        }
+      },
+      "reviews": {
+        "r1": {
+          "username": "Gopal",
+          "review": "Everything is good and i choose civil engineering. As I was more inclined towards design field and I'm happy to get in real world problem solving."
+        },
+        "r2": {
+          "username": "Gopal",
+          "review": "Campus placement of this college is great and placement starts once the student enters in 4th year. The highest package is 64lpa."
+        },
+        "r3": {
+          "username": "Gopal",
+          "review": "Our college is known for its placement scenario all over Maharashtra. It has a huge alumni network that builds it's reputation till date."
+        }
+      },
+      "admission": "Admission to B.Tech is through MHT CET or JEE Main scores, followed by CAP rounds conducted by State CET Cell, Maharashtra.",
+      "cutoffs": [
+        {
+          "course": "Computer Engineering",
+          "category": "GOPENH",
+          "percentile": "99.8"
+        },
+        {
+          "course": "Information Technology",
+          "category": "GOPENH",
+          "percentile": "99.5"
+        },
+        {
+          "course": "Electronics",
+          "category": "GOPENH",
+          "percentile": "98.2"
+        }
+      ],
+      "ranking": "Ranked among top 100 Engineering Colleges in India by NIRF. Graded A by NAAC.",
+      "gallery": [
+        "https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1525926476839-2a90d16ebbd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      ],
+      "scholarship": "EBC Concession, TFWS scheme, and various state-sponsored scholarships for minority and backward class students.",
+      "faculty": [
+        {
+          "name": "Dr. R. N. Awale",
+          "role": "Professor & Head",
+          "dept": "Computer Engineering"
+        },
+        {
+          "name": "Prof. S. G. Bhirud",
+          "role": "Professor",
+          "dept": "Information Technology"
+        }
+      ],
+      "news": [
+        {
+          "title": "Tech Fest 2026 Announced",
+          "date": "June 10, 2026"
+        },
+        {
+          "title": "Highest Package crosses 60 LPA",
+          "date": "May 22, 2026"
+        }
+      ],
+      "hostel": {
+        "fees": "30,000 / YR",
+        "capacity": "800 Students",
+        "amenities": [
+          "Wi-Fi",
+          "Mess",
+          "Recreation Room",
+          "Gym"
+        ]
+      },
+      "qa": [
+        {
+          "q": "Is there a management quota?",
+          "a": "Most reputed autonomous institutes in Maharashtra have no management quota. Admission is strictly merit-based."
+        },
+        {
+          "q": "What is the average package?",
+          "a": "The average package for CS/IT is generally around 12-14 LPA."
+        }
+      ]
+    },
+    "SPIT - Sardar Patel Institute of Technology": {
+      "name": "Sardar Patel Institute of Technology - [SPIT]",
+      "description": "Sardar Patel Institute of Technology is an autonomous engineering institute located in Andheri, Mumbai. It is affiliated with the University of Mumbai and offers top-tier education in Computer Science and IT. Ranked prominently by NIRF, SPIT boasts an incredible coding culture and consistently high placement records with top MNCs.",
+      "fees": "170000",
+      "images": {
+        "logo": "https://www.spit.ac.in/wp-content/themes/spit-main/images/logo.gif"
+      },
+      "location": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.010537060799!2d72.83391981535645!3d19.12471698705978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9d90e067ba9%3A0x16268e5d6bca2e6a!2sSardar%20Patel%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1628151234567!5m2!1sen!2sin\" width=\"100%\" height=\"100%\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>",
+      "placement": {
+        "y2021": "10.0",
+        "y2022": "11.5",
+        "y2023": "13.0",
+        "y2024": "15.0"
+      },
+      "courses": {
+        "c1": {
+          "name": "B.Tech Computer Engineering",
+          "seat": 120,
+          "exams": "MHT CET / JEE",
+          "duration": "4 Years",
+          "fees": "170000"
+        },
+        "c2": {
+          "name": "B.Tech Information Technology",
+          "seat": 60,
+          "exams": "MHT CET / JEE",
+          "duration": "4 Years",
+          "fees": "170000"
+        },
+        "c3": {
+          "name": "B.Tech Artificial Intelligence",
+          "seat": 60,
+          "exams": "MHT CET / JEE",
+          "duration": "4 Years",
+          "fees": "170000"
+        }
+      },
+      "reviews": {
+        "r1": {
+          "username": "SPIT_Student",
+          "review": "Amazing coding culture. Top-notch placements for CS and IT."
+        },
+        "r2": {
+          "username": "Coder123",
+          "review": "Very focused on academics and projects. Infrastructure is great."
+        }
+      },
+      "admission": "Admission to B.Tech is through MHT CET or JEE Main scores, followed by CAP rounds conducted by State CET Cell, Maharashtra.",
+      "cutoffs": [
+        {
+          "course": "Computer Engineering",
+          "category": "GOPENH",
+          "percentile": "99.8"
+        },
+        {
+          "course": "Information Technology",
+          "category": "GOPENH",
+          "percentile": "99.5"
+        },
+        {
+          "course": "Electronics",
+          "category": "GOPENH",
+          "percentile": "98.2"
+        }
+      ],
+      "ranking": "Ranked among top 100 Engineering Colleges in India by NIRF. Graded A by NAAC.",
+      "gallery": [
+        "https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1525926476839-2a90d16ebbd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      ],
+      "scholarship": "EBC Concession, TFWS scheme, and various state-sponsored scholarships for minority and backward class students.",
+      "faculty": [
+        {
+          "name": "Dr. R. N. Awale",
+          "role": "Professor & Head",
+          "dept": "Computer Engineering"
+        },
+        {
+          "name": "Prof. S. G. Bhirud",
+          "role": "Professor",
+          "dept": "Information Technology"
+        }
+      ],
+      "news": [
+        {
+          "title": "Tech Fest 2026 Announced",
+          "date": "June 10, 2026"
+        },
+        {
+          "title": "Highest Package crosses 60 LPA",
+          "date": "May 22, 2026"
+        }
+      ],
+      "hostel": {
+        "fees": "30,000 / YR",
+        "capacity": "800 Students",
+        "amenities": [
+          "Wi-Fi",
+          "Mess",
+          "Recreation Room",
+          "Gym"
+        ]
+      },
+      "qa": [
+        {
+          "q": "Is there a management quota?",
+          "a": "Most reputed autonomous institutes in Maharashtra have no management quota. Admission is strictly merit-based."
+        },
+        {
+          "q": "What is the average package?",
+          "a": "The average package for CS/IT is generally around 12-14 LPA."
+        }
+      ]
+    },
+    "D. J. Sanghvi College of Engineering": {
+      "name": "Dwarkadas J. Sanghvi College of Engineering - [DJSCE]",
+      "description": "Dwarkadas J. Sanghvi College of Engineering, located in Vile Parle, Mumbai, is a premier private engineering college. Run by the SVKM trust, it is known for its excellent infrastructure, vibrant campus life, and strong alumni network. It offers specialized courses in emerging technologies like AI, Data Science, and Machine Learning.",
+      "fees": "210000",
+      "images": {
+        "logo": "https://djsce.ac.in/images/logo.png"
+      },
+      "location": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.210537060799!2d72.83591981535645!3d19.10471698705978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9d90e067ba9%3A0x16268e5d6bca2e6a!2sDJSCE!5e0!3m2!1sen!2sin!4v1628151234567!5m2!1sen!2sin\" width=\"100%\" height=\"100%\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>",
+      "placement": {
+        "y2021": "8.0",
+        "y2022": "9.5",
+        "y2023": "11.0",
+        "y2024": "12.0"
+      },
+      "courses": {
+        "c1": {
+          "name": "B.Tech Computer Engineering",
+          "seat": 120,
+          "exams": "MHT CET / JEE",
+          "duration": "4 Years",
+          "fees": "210000"
+        },
+        "c2": {
+          "name": "B.Tech Information Technology",
+          "seat": 60,
+          "exams": "MHT CET / JEE",
+          "duration": "4 Years",
+          "fees": "210000"
+        },
+        "c3": {
+          "name": "B.Tech AI & Data Science",
+          "seat": 60,
+          "exams": "MHT CET / JEE",
+          "duration": "4 Years",
+          "fees": "210000"
+        }
+      },
+      "reviews": {
+        "r1": {
+          "username": "VileParleGeek",
+          "review": "One of the best Gujarati minority colleges. Placements are solid."
+        }
+      },
+      "admission": "Admission to B.Tech is through MHT CET or JEE Main scores, followed by CAP rounds conducted by State CET Cell, Maharashtra.",
+      "cutoffs": [
+        {
+          "course": "Computer Engineering",
+          "category": "GOPENH",
+          "percentile": "99.8"
+        },
+        {
+          "course": "Information Technology",
+          "category": "GOPENH",
+          "percentile": "99.5"
+        },
+        {
+          "course": "Electronics",
+          "category": "GOPENH",
+          "percentile": "98.2"
+        }
+      ],
+      "ranking": "Ranked among top 100 Engineering Colleges in India by NIRF. Graded A by NAAC.",
+      "gallery": [
+        "https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1525926476839-2a90d16ebbd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      ],
+      "scholarship": "EBC Concession, TFWS scheme, and various state-sponsored scholarships for minority and backward class students.",
+      "faculty": [
+        {
+          "name": "Dr. R. N. Awale",
+          "role": "Professor & Head",
+          "dept": "Computer Engineering"
+        },
+        {
+          "name": "Prof. S. G. Bhirud",
+          "role": "Professor",
+          "dept": "Information Technology"
+        }
+      ],
+      "news": [
+        {
+          "title": "Tech Fest 2026 Announced",
+          "date": "June 10, 2026"
+        },
+        {
+          "title": "Highest Package crosses 60 LPA",
+          "date": "May 22, 2026"
+        }
+      ],
+      "hostel": {
+        "fees": "30,000 / YR",
+        "capacity": "800 Students",
+        "amenities": [
+          "Wi-Fi",
+          "Mess",
+          "Recreation Room",
+          "Gym"
+        ]
+      },
+      "qa": [
+        {
+          "q": "Is there a management quota?",
+          "a": "Most reputed autonomous institutes in Maharashtra have no management quota. Admission is strictly merit-based."
+        },
+        {
+          "q": "What is the average package?",
+          "a": "The average package for CS/IT is generally around 12-14 LPA."
+        }
+      ]
+    },
+    "TSEC - Thadomal Shahani Engineering College": {
+      "name": "Thadomal Shahani Engineering College - [TSEC]",
+      "description": "Thadomal Shahani Engineering College, located in Bandra, is the first and the oldest private engineering institute affiliated with the University of Mumbai. It provides exceptional exposure and top placements in reputed companies. The college has a diverse culture and an active student council organizing major tech fests.",
+      "fees": "180000",
+      "images": {
+        "logo": "https://tsec.edu/wp-content/uploads/2019/07/logo.png"
+      },
+      "location": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.210537060799!2d72.83591981535645!3d19.10471698705978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9d90e067ba9%3A0x16268e5d6bca2e6a!2sTSEC!5e0!3m2!1sen!2sin!4v1628151234567!5m2!1sen!2sin\" width=\"100%\" height=\"100%\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>",
+      "placement": {
+        "y2021": "7.5",
+        "y2022": "8.5",
+        "y2023": "10.0",
+        "y2024": "11.0"
+      },
+      "courses": {
+        "c1": {
+          "name": "B.Tech Computer Engineering",
+          "seat": 120,
+          "exams": "MHT CET / JEE",
+          "duration": "4 Years",
+          "fees": "180000"
+        },
+        "c2": {
+          "name": "B.Tech Information Technology",
+          "seat": 60,
+          "exams": "MHT CET / JEE",
+          "duration": "4 Years",
+          "fees": "180000"
+        }
+      },
+      "reviews": {
+        "r1": {
+          "username": "BandraLocal",
+          "review": "Great location, good crowd, and excellent faculty for IT."
+        }
+      },
+      "admission": "Admission to B.Tech is through MHT CET or JEE Main scores, followed by CAP rounds conducted by State CET Cell, Maharashtra.",
+      "cutoffs": [
+        {
+          "course": "Computer Engineering",
+          "category": "GOPENH",
+          "percentile": "99.8"
+        },
+        {
+          "course": "Information Technology",
+          "category": "GOPENH",
+          "percentile": "99.5"
+        },
+        {
+          "course": "Electronics",
+          "category": "GOPENH",
+          "percentile": "98.2"
+        }
+      ],
+      "ranking": "Ranked among top 100 Engineering Colleges in India by NIRF. Graded A by NAAC.",
+      "gallery": [
+        "https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1525926476839-2a90d16ebbd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      ],
+      "scholarship": "EBC Concession, TFWS scheme, and various state-sponsored scholarships for minority and backward class students.",
+      "faculty": [
+        {
+          "name": "Dr. R. N. Awale",
+          "role": "Professor & Head",
+          "dept": "Computer Engineering"
+        },
+        {
+          "name": "Prof. S. G. Bhirud",
+          "role": "Professor",
+          "dept": "Information Technology"
+        }
+      ],
+      "news": [
+        {
+          "title": "Tech Fest 2026 Announced",
+          "date": "June 10, 2026"
+        },
+        {
+          "title": "Highest Package crosses 60 LPA",
+          "date": "May 22, 2026"
+        }
+      ],
+      "hostel": {
+        "fees": "30,000 / YR",
+        "capacity": "800 Students",
+        "amenities": [
+          "Wi-Fi",
+          "Mess",
+          "Recreation Room",
+          "Gym"
+        ]
+      },
+      "qa": [
+        {
+          "q": "Is there a management quota?",
+          "a": "Most reputed autonomous institutes in Maharashtra have no management quota. Admission is strictly merit-based."
+        },
+        {
+          "q": "What is the average package?",
+          "a": "The average package for CS/IT is generally around 12-14 LPA."
+        }
+      ]
+    },
+    "Fr. Conceicao Rodrigues College of Engineering": {
+      "name": "Fr. Conceicao Rodrigues College of Engineering - [Fr. Agnel]",
+      "description": "Fr. Conceicao Rodrigues College of Engineering, commonly known as Fr. Agnel, is located in Bandra West. Established in 1984, the college is known for its highly disciplined environment and rigorous academic curriculum. The institute boasts state-of-the-art laboratories and a strong placement cell.",
+      "fees": "160000",
+      "images": {
+        "logo": "https://frcrce.ac.in/images/logo.png"
+      },
+      "location": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.210537060799!2d72.83591981535645!3d19.10471698705978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9d90e067ba9%3A0x16268e5d6bca2e6a!2sFRCRCE!5e0!3m2!1sen!2sin!4v1628151234567!5m2!1sen!2sin\" width=\"100%\" height=\"100%\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>",
+      "placement": {
+        "y2021": "6.0",
+        "y2022": "7.0",
+        "y2023": "8.5",
+        "y2024": "9.5"
+      },
+      "courses": {
+        "c1": {
+          "name": "B.Tech Computer Engineering",
+          "seat": 120,
+          "exams": "MHT CET / JEE",
+          "duration": "4 Years",
+          "fees": "160000"
+        }
+      },
+      "reviews": {
+        "r1": {
+          "username": "Agnelite",
+          "review": "Discipline is strict but overall education quality is high."
+        }
+      },
+      "admission": "Admission to B.Tech is through MHT CET or JEE Main scores, followed by CAP rounds conducted by State CET Cell, Maharashtra.",
+      "cutoffs": [
+        {
+          "course": "Computer Engineering",
+          "category": "GOPENH",
+          "percentile": "99.8"
+        },
+        {
+          "course": "Information Technology",
+          "category": "GOPENH",
+          "percentile": "99.5"
+        },
+        {
+          "course": "Electronics",
+          "category": "GOPENH",
+          "percentile": "98.2"
+        }
+      ],
+      "ranking": "Ranked among top 100 Engineering Colleges in India by NIRF. Graded A by NAAC.",
+      "gallery": [
+        "https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1525926476839-2a90d16ebbd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      ],
+      "scholarship": "EBC Concession, TFWS scheme, and various state-sponsored scholarships for minority and backward class students.",
+      "faculty": [
+        {
+          "name": "Dr. R. N. Awale",
+          "role": "Professor & Head",
+          "dept": "Computer Engineering"
+        },
+        {
+          "name": "Prof. S. G. Bhirud",
+          "role": "Professor",
+          "dept": "Information Technology"
+        }
+      ],
+      "news": [
+        {
+          "title": "Tech Fest 2026 Announced",
+          "date": "June 10, 2026"
+        },
+        {
+          "title": "Highest Package crosses 60 LPA",
+          "date": "May 22, 2026"
+        }
+      ],
+      "hostel": {
+        "fees": "30,000 / YR",
+        "capacity": "800 Students",
+        "amenities": [
+          "Wi-Fi",
+          "Mess",
+          "Recreation Room",
+          "Gym"
+        ]
+      },
+      "qa": [
+        {
+          "q": "Is there a management quota?",
+          "a": "Most reputed autonomous institutes in Maharashtra have no management quota. Admission is strictly merit-based."
+        },
+        {
+          "q": "What is the average package?",
+          "a": "The average package for CS/IT is generally around 12-14 LPA."
+        }
+      ]
+    },
+    "Mukesh Patel School of Technology": {
+      "name": "Mukesh Patel School of Technology - [NMIMS MPSTME]",
+      "description": "Mukesh Patel School of Technology Management and Engineering is an AICTE approved constituent school of SVKM's NMIMS Deemed-to-be University. The college integrates technical skills with management knowledge and offers unique programs like B.Tech + MBA Tech.",
+      "fees": "350000",
+      "images": {
+        "logo": "https://engineering.nmims.edu/images/logo.png"
+      },
+      "location": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.210537060799!2d72.83591981535645!3d19.10471698705978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9d90e067ba9%3A0x16268e5d6bca2e6a!2sMPSTME!5e0!3m2!1sen!2sin!4v1628151234567!5m2!1sen!2sin\" width=\"100%\" height=\"100%\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>",
+      "placement": {
+        "y2021": "8.5",
+        "y2022": "9.5",
+        "y2023": "11.5",
+        "y2024": "12.5"
+      },
+      "courses": {
+        "c1": {
+          "name": "B.Tech Computer Engineering",
+          "seat": 120,
+          "exams": "NMIMS CET",
+          "duration": "4 Years",
+          "fees": "350000"
+        },
+        "c2": {
+          "name": "B.Tech Artificial Intelligence",
+          "seat": 60,
+          "exams": "NMIMS CET",
+          "duration": "4 Years",
+          "fees": "350000"
+        },
+        "c3": {
+          "name": "MBA Tech",
+          "seat": 60,
+          "exams": "NMIMS CET",
+          "duration": "5 Years",
+          "fees": "450000"
+        }
+      },
+      "reviews": {
+        "r1": {
+          "username": "NMIMS_Student",
+          "review": "Fees are very high, but the crowd and exposure are unmatched."
+        }
+      },
+      "admission": "Admission to B.Tech is through MHT CET or JEE Main scores, followed by CAP rounds conducted by State CET Cell, Maharashtra.",
+      "cutoffs": [
+        {
+          "course": "Computer Engineering",
+          "category": "GOPENH",
+          "percentile": "99.8"
+        },
+        {
+          "course": "Information Technology",
+          "category": "GOPENH",
+          "percentile": "99.5"
+        },
+        {
+          "course": "Electronics",
+          "category": "GOPENH",
+          "percentile": "98.2"
+        }
+      ],
+      "ranking": "Ranked among top 100 Engineering Colleges in India by NIRF. Graded A by NAAC.",
+      "gallery": [
+        "https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1525926476839-2a90d16ebbd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      ],
+      "scholarship": "EBC Concession, TFWS scheme, and various state-sponsored scholarships for minority and backward class students.",
+      "faculty": [
+        {
+          "name": "Dr. R. N. Awale",
+          "role": "Professor & Head",
+          "dept": "Computer Engineering"
+        },
+        {
+          "name": "Prof. S. G. Bhirud",
+          "role": "Professor",
+          "dept": "Information Technology"
+        }
+      ],
+      "news": [
+        {
+          "title": "Tech Fest 2026 Announced",
+          "date": "June 10, 2026"
+        },
+        {
+          "title": "Highest Package crosses 60 LPA",
+          "date": "May 22, 2026"
+        }
+      ],
+      "hostel": {
+        "fees": "30,000 / YR",
+        "capacity": "800 Students",
+        "amenities": [
+          "Wi-Fi",
+          "Mess",
+          "Recreation Room",
+          "Gym"
+        ]
+      },
+      "qa": [
+        {
+          "q": "Is there a management quota?",
+          "a": "Most reputed autonomous institutes in Maharashtra have no management quota. Admission is strictly merit-based."
+        },
+        {
+          "q": "What is the average package?",
+          "a": "The average package for CS/IT is generally around 12-14 LPA."
+        }
+      ]
+    }
+  }
+}
