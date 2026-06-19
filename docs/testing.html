@@ -57,6 +57,10 @@
       animation: spin 1s linear infinite;
     }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .modal-overlay {
+      background-color: rgba(0,0,0,0.8);
+      backdrop-filter: blur(4px);
+    }
   </style>
 </head>
 <body class="font-sans min-h-screen flex flex-col">
@@ -65,6 +69,26 @@
   <div class="flex-grow flex flex-col items-center justify-center bg-surface">
     <div class="spinner mb-6"></div>
     <div class="font-black text-2xl uppercase tracking-widest">Searching Database...</div>
+  </div>
+</div>
+
+<!-- Full-Screen Search Modal -->
+<div id="search-modal" class="fixed inset-0 z-[100] hidden modal-overlay items-center justify-center p-4">
+  <div class="w-full max-w-4xl bg-white border-hard shadow-[16px_16px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+    <div class="flex justify-between items-center border-b-hard p-4 bg-surface">
+      <div class="font-black uppercase tracking-widest">Search Database</div>
+      <button onclick="toggleModal('search-modal')" class="hover:bg-black hover:text-white px-2 py-1 font-bold">X</button>
+    </div>
+    <div class="p-8 md:p-16">
+      <input 
+        type="text" 
+        id="search" 
+        class="w-full border-b-hard text-4xl md:text-6xl font-black uppercase focus:outline-none focus:border-b-4 placeholder-gray-300 pb-4" 
+        placeholder="ENTER COLLEGE..."
+        onkeypress="handleKeyPress(event)"
+        autocomplete="off"
+      >
+    </div>
   </div>
 </div>
 
@@ -86,6 +110,30 @@
       }
     }
   });
+
+  window.toggleModal = function(id) {
+    const modal = document.getElementById(id);
+    if (modal.classList.contains('hidden')) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      if(id === 'search-modal') {
+        setTimeout(() => document.getElementById('search').focus(), 100);
+      }
+    } else {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  }
+
+  window.handleKeyPress = function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const searchTerm = document.getElementById('search').value.trim();
+      if (searchTerm) {
+        window.location.href = `testing.html?key=${encodeURIComponent(searchTerm)}`;
+      }
+    }
+  }
 
   async function searchColleges() {
     const searchParams = new URLSearchParams(window.location.search);
@@ -222,7 +270,10 @@
             COLLEGEQUEST
           </a>
           <div class="flex flex-grow justify-end">
-            <a href="index.html" class="flex items-center justify-center px-8 border-l-hard font-bold text-sm uppercase tracking-wide hover:bg-black hover:text-white transition-colors">BACK TO SEARCH</a>
+            <button onclick="toggleModal('search-modal')" class="flex items-center justify-center px-6 border-l-hard hover:bg-black hover:text-white transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </button>
+            <a href="index.html" class="hidden md:flex items-center justify-center px-8 border-l-hard font-bold text-sm uppercase tracking-wide hover:bg-black hover:text-white transition-colors">BACK TO SEARCH</a>
             <button id="nav-login-btn" onclick="window.location.href='index.html'" class="hidden md:flex items-center justify-center px-8 border-l-hard bg-black text-white font-bold text-sm uppercase tracking-wide hover:bg-surface hover:text-black transition-colors">
               Login
             </button>
