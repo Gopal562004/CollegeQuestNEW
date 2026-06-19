@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Firestore Migration Tool</title>
+  <style>
+    body { font-family: sans-serif; padding: 40px; background: #f9fafb; }
+    .container { max-w: 600px; margin: 0 auto; background: white; padding: 30px; border: 2px solid black; }
+    h1 { text-transform: uppercase; font-weight: 900; border-bottom: 2px solid black; padding-bottom: 10px; }
+    button { background: black; color: white; border: 2px solid black; padding: 10px 20px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+    button:hover { background: white; color: black; }
+    #log { margin-top: 20px; padding: 10px; background: #eee; font-family: monospace; white-space: pre-wrap; max-height: 400px; overflow-y: auto; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Migrate to Firestore</h1>
+  <p>1. Select your <b>collegequest-101dc-default-rtdb-export.json</b> file.</p>
+  <input type="file" id="jsonFile" accept=".json">
+  <br>
+  <button id="startBtn">Start Migration</button>
+  <div id="log">Logs will appear here...</div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDPqF6iiONiN6WEGsv6GtyPDaPK8b_1ROc",
+    authDomain: "collegequest-101dc.firebaseapp.com",
+    projectId: "collegequest-101dc",
+    storageBucket: "collegequest-101dc.appspot.com",
+    messagingSenderId: "900326719034",
+    appId: "1:900326719034:web:4a4b48ecfb2d927bfd7f03"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const logEl = document.getElementById("log");
+  function log(msg) {
+    console.log(msg);
+    logEl.innerHTML += msg + "\n";
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  function generateSearchTerms(name) {
+    if(!name) return [];
+    // Lowercase everything
+    let lowerName = name.toLowerCase();
+    // Split by spaces or punctuation
+    let words = lowerName.split(/[\s,.-]+/);
+    // Add the full name itself as a searchable term
+    words.push(lowerName);
+    // Remove empty strings and duplicates
+    return [...new Set(words.filter(w => w.trim() !== ""))];
+  }
+
+  document.getElementById("startBtn").addEventListener("click", async () => {
+    const fileInput = document.getElementById("jsonFile");
+    if (fileInput.files.length === 0) {
+      alert("Please select the JSON file first.");
+      return;
+    }
+
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.onload = async function(e) {
+      try {
+        const data = JSON.parse(e.target.result);
+        
+        // 1. Migrate Users
+        if (data.UserAuthList) {
+          const users = data.UserAuthList;
+          const userKeys = Object.keys(users);
+          log(`Found ${userKeys.length} users to migrate...`);
+          for (const uid of userKeys) {
+            try {
+              await setDoc(doc(db, "users", uid), users[uid]);
+              log(`SUCCESS: User ${users[uid].username || uid}`);
+            } catch (err) {
+              log(`ERROR uploading user ${uid}: ${err.message}`);
+            }
+          }
+        } else {
+          log("Notice: 'UserAuthList' node not found in JSON.");
+        }
+
+        // 2. Migrate Colleges
+        if (data.colleges) {
+          const colleges = data.colleges;
+          const collegeKeys = Object.keys(colleges);
+          log(`\nFound ${collegeKeys.length} colleges to migrate...`);
+
+          for (const key of collegeKeys) {
+            const collegeData = colleges[key];
+            
+            // Generate search terms based on the college name (or the key)
+            const nameToTokenize = collegeData.name || key;
+            collegeData.searchTerms = generateSearchTerms(nameToTokenize);
+
+            // Save to Firestore using the college name/key as the document ID
+            log(`Uploading: ${nameToTokenize}...`);
+            try {
+              await setDoc(doc(db, "colleges", key), collegeData);
+              log(`SUCCESS: ${nameToTokenize}`);
+            } catch (err) {
+              log(`ERROR uploading ${nameToTokenize}: ${err.message}`);
+            }
+          }
+        } else {
+          log("Notice: 'colleges' node not found in JSON.");
+        }
+        
+        log("\n--- MIGRATION COMPLETE ---");
+        log("You can now test the live site!");
+
+      } catch (err) {
+        log(`Error parsing JSON: ${err.message}`);
+      }
+    };
+
+    reader.readAsText(file);
+  });
+</script>
+</body>
+</html>

@@ -70,47 +70,41 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+  import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDPqF6iiONiN6WEGsv6GtyPDaPK8b_1ROc",
     authDomain: "collegequest-101dc.firebaseapp.com",
-    databaseURL: "https://collegequest-101dc-default-rtdb.firebaseio.com",
     projectId: "collegequest-101dc",
     storageBucket: "collegequest-101dc.appspot.com",
     messagingSenderId: "900326719034",
-    appId: "1:900326719034:web:4a4b48ecfb2d927bfd7f03",
-    measurementId: "G-BY25JWXVWJ"
+    appId: "1:900326719034:web:4a4b48ecfb2d927bfd7f03"
   };
 
   const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
+  const db = getFirestore(app);
 
-  function searchColleges() {
+  async function searchColleges() {
     const searchParams = new URLSearchParams(window.location.search);
     const key = searchParams.get("key");
 
     if (key) {
-      const searchInput = key.toLowerCase();
-      const collegesRef = ref(database, "colleges");
+      const searchInput = key.toLowerCase().trim();
+      try {
+        const q = query(collection(db, "colleges"), where("searchTerms", "array-contains", searchInput));
+        const querySnapshot = await getDocs(q);
 
-      onValue(collegesRef, (snapshot) => {
-        const data = snapshot.val();
-        let searchedCollege = null;
-        for (const collegeKey in data) {
-          const college = data[collegeKey];
-          if (collegeKey.toLowerCase().includes(searchInput)) {
-            searchedCollege = college;
-            break;
-          }
-        }
-
-        if (searchedCollege) {
+        if (!querySnapshot.empty) {
+          // Get the first matched college
+          const searchedCollege = querySnapshot.docs[0].data();
           renderSearchedCollege(searchedCollege);
         } else {
           renderError("NOT FOUND", "College not found in our database.");
         }
-      });
+      } catch (error) {
+        console.error("Error fetching from Firestore:", error);
+        renderError("ERROR", "Failed to connect to the database.");
+      }
     } else {
       renderError("ERROR", "No search query provided.");
     }
