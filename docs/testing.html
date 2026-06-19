@@ -289,7 +289,6 @@
             <div class="flex justify-between items-center mb-6 font-medium text-sm"><span class="text-muted uppercase tracking-wider">Duration</span> <span class="font-bold">${course.duration || '4 Years'}</span></div>
             <div class="mt-auto border-t-hard pt-4 flex justify-between items-end">
               <div class="font-black text-xl">₹ ${course.fees || collegeData.fees || 'N/A'} <span class="text-xs font-bold text-muted">/YR</span></div>
-              <button class="uppercase font-bold text-xs tracking-widest border-b-2 border-black hover:bg-black hover:text-white transition-colors">Details</button>
             </div>
           </div>
         `;
@@ -432,6 +431,21 @@
               ${reviewsHtml || '<div class="p-8 font-bold">No reviews yet.</div>'}
             </div>
           </section>
+
+          <!-- Facilities -->
+          <section class="border-b-hard">
+            <div class="p-8 border-b-hard bg-surface">
+              <h2 class="text-3xl font-black uppercase tracking-tight">Campus Facilities</h2>
+            </div>
+            <div class="p-8 flex flex-wrap gap-4">
+              ${(collegeData.facilities || ['Library', 'Cafeteria', 'Hostel', 'Sports Complex', 'Gym', 'Wi-Fi Campus', 'Auditorium', 'Labs']).map(fac => 
+                `<div class="border-hard px-6 py-3 font-bold uppercase tracking-widest text-sm bg-white hover:bg-black hover:text-white transition-colors cursor-default shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1">
+                  ${fac}
+                 </div>`
+              ).join('')}
+            </div>
+          </section>
+
         </main>
 
         <!-- Right Column -->
