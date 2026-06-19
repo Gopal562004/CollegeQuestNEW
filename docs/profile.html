@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROFILE - COLLEGEQUEST</title>
+  <link rel="icon" href="./images/logob.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            accent: '#000000',
+            bg: '#ffffff',
+            text: '#000000',
+            muted: '#6b7280',
+            surface: '#f9fafb'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #000000;
+      -webkit-font-smoothing: antialiased;
+    }
+    .border-hard { border: 2px solid #000000; }
+    .border-b-hard { border-bottom: 2px solid #000000; }
+    .border-t-hard { border-top: 2px solid #000000; }
+    .border-l-hard { border-left: 2px solid #000000; }
+    .border-r-hard { border-right: 2px solid #000000; }
+    
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #000000;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col bg-surface">
+
+<nav class="w-full border-b-hard bg-bg sticky top-0 z-50">
+  <div class="flex justify-between items-stretch h-16">
+    <a href="index.html" class="flex items-center px-6 border-r-hard font-black text-2xl tracking-tighter uppercase hover:bg-black hover:text-white transition-colors">
+      COLLEGEQUEST
+    </a>
+    
+    <div class="flex flex-grow justify-end">
+      <a href="index.html" class="flex items-center justify-center px-8 border-l-hard font-bold text-sm uppercase tracking-wide hover:bg-black hover:text-white transition-colors">Home</a>
+      <button id="signout-btn" class="hidden md:flex items-center justify-center px-8 border-l-hard bg-black text-white font-bold text-sm uppercase tracking-wide hover:bg-surface hover:text-black transition-colors">
+        Sign Out
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="border-b-hard bg-white p-12 md:p-24 flex flex-col items-center text-center">
+  <div class="w-32 h-32 border-hard shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-surface flex items-center justify-center mb-8">
+    <svg class="w-16 h-16 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+  </div>
+  <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4" id="profile-email">LOADING...</h1>
+  <p class="font-bold text-muted uppercase tracking-widest text-sm">Welcome to your dashboard</p>
+</header>
+
+<main class="flex-grow p-8 md:p-16 max-w-7xl mx-auto w-full">
+  <div class="flex justify-between items-end mb-8 border-b-hard pb-4">
+    <h2 class="text-3xl font-black uppercase tracking-tight">Your Wishlist</h2>
+    <span id="wishlist-count" class="font-bold text-muted uppercase tracking-widest text-sm">0 Colleges</span>
+  </div>
+
+  <div id="loading-indicator" class="flex flex-col items-center justify-center py-24">
+    <div class="spinner mb-6"></div>
+    <div class="font-bold uppercase tracking-widest text-muted">Fetching saved colleges...</div>
+  </div>
+
+  <div id="wishlist-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
+    <!-- Cards will be injected here -->
+  </div>
+  
+  <div id="empty-state" class="hidden flex flex-col items-center justify-center py-24 text-center">
+    <h3 class="text-2xl font-black uppercase tracking-tighter mb-4">Nothing Here Yet</h3>
+    <p class="font-bold text-muted uppercase tracking-widest text-sm mb-8">Start exploring colleges and add them to your wishlist.</p>
+    <button onclick="window.location.href='index.html'" class="border-hard bg-black text-white px-8 py-4 font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-colors shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1">
+      Browse Colleges
+    </button>
+  </div>
+</main>
+
+<footer class="bg-black text-white p-8 border-t-hard flex justify-between items-center mt-auto">
+  <div class="text-2xl font-black uppercase tracking-tighter">COLLEGEQUEST</div>
+  <div class="text-xs font-bold uppercase tracking-widest text-gray-500">© 2024</div>
+</footer>
+
+<script type="module">
+  import { db, auth, onAuthStateChanged, signOut } from "./auth.js";
+  import { doc, getDoc, updateDoc, arrayRemove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  const emailEl = document.getElementById("profile-email");
+  const countEl = document.getElementById("wishlist-count");
+  const gridEl = document.getElementById("wishlist-grid");
+  const loadingEl = document.getElementById("loading-indicator");
+  const emptyEl = document.getElementById("empty-state");
+
+  document.getElementById("signout-btn").addEventListener("click", async () => {
+    await signOut(auth);
+    window.location.href = "index.html";
+  });
+
+  window.unsaveCollege = async function(collegeId) {
+    if(!auth.currentUser) return;
+    try {
+      const userRef = doc(db, "users", auth.currentUser.uid);
+      await updateDoc(userRef, {
+        savedColleges: arrayRemove(collegeId)
+      });
+      // Refresh the page or remove the element
+      document.getElementById(`card-${collegeId}`).remove();
+      // Update count
+      const currentCount = parseInt(countEl.innerText);
+      countEl.innerText = `${currentCount - 1} Colleges`;
+      if(currentCount - 1 === 0) {
+        gridEl.classList.add("hidden");
+        emptyEl.classList.remove("hidden");
+        emptyEl.classList.add("flex");
+      }
+    } catch(err) {
+      console.error("Error unsaving:", err);
+      alert("Failed to unsave. Check console.");
+    }
+  }
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.href = "index.html";
+      return;
+    }
+
+    emailEl.innerText = user.email || user.uid;
+
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+      
+      loadingEl.classList.add("hidden");
+
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        const savedIds = userData.savedColleges || [];
+
+        countEl.innerText = `${savedIds.length} Colleges`;
+
+        if (savedIds.length === 0) {
+          emptyEl.classList.remove("hidden");
+          emptyEl.classList.add("flex");
+        } else {
+          gridEl.classList.remove("hidden");
+          
+          // Fetch each college
+          for (const cId of savedIds) {
+            const cRef = doc(db, "colleges", cId);
+            const cSnap = await getDoc(cRef);
+            
+            if (cSnap.exists()) {
+              const cData = cSnap.data();
+              const card = document.createElement("div");
+              card.id = `card-${cId}`;
+              card.className = "border-hard bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all";
+              card.innerHTML = `
+                <div class="h-48 border-b-hard p-4 flex items-center justify-center bg-surface relative">
+                  <img src="${cData.images?.logo || './images/st.jpeg'}" alt="Logo" class="max-w-full max-h-full object-contain mix-blend-multiply">
+                  <button onclick="unsaveCollege('${cId}')" class="absolute top-4 right-4 bg-white border-hard px-3 py-1 font-bold text-xs uppercase hover:bg-black hover:text-white transition-colors">
+                    Unsave X
+                  </button>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                  <h3 class="font-black text-xl uppercase leading-tight mb-4">${cData.name || cId}</h3>
+                  <div class="mt-auto pt-4 border-t-hard flex justify-between items-center">
+                    <div class="font-black text-lg">₹ ${cData.fees || 'N/A'} <span class="text-xs font-bold text-muted">/YR</span></div>
+                    <a href="testing.html?key=${encodeURIComponent(cData.name || cId)}" class="font-bold text-sm uppercase tracking-widest border-b-2 border-black hover:text-muted hover:border-muted transition-colors">
+                      View
+                    </a>
+                  </div>
+                </div>
+              `;
+              gridEl.appendChild(card);
+            }
+          }
+        }
+      } else {
+        emptyEl.classList.remove("hidden");
+        emptyEl.classList.add("flex");
+      }
+    } catch (err) {
+      console.error("Error fetching profile:", err);
+      loadingEl.innerHTML = `<div class="font-bold text-red-600 uppercase tracking-widest">Error Loading Data</div>`;
+    }
+  });
+</script>
+</body>
+</html>
