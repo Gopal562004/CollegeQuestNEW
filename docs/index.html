@@ -364,13 +364,21 @@
     document.getElementById('auth-switch-btn').innerText = window.isLogin ? 'Switch to Register ->' : '<- Switch to Login';
   }
 
-  window.handleKeyPress = function(event) {
+  window.handleKeyPress = async function(event) {
     if (event.key === "Enter") {
       event.preventDefault();
-      const searchTerm = document.getElementById('search').value.trim();
-      if (searchTerm) {
-        window.location.href = `testing.html?key=${encodeURIComponent(searchTerm)}`;
+      const input = document.getElementById('search').value.toLowerCase().trim();
+      if (!input) return;
+
+      if (collegesPromise) {
+        const cache = await collegesPromise;
+        const filtered = cache.filter(c => c.name.toLowerCase().includes(input));
+        if (filtered.length > 0) {
+          window.location.href = `testing.html?key=${encodeURIComponent(filtered[0].name)}`;
+          return;
+        }
       }
+      window.location.href = `testing.html?key=${encodeURIComponent(input)}`;
     }
   }
 

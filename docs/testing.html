@@ -127,6 +127,70 @@
     }
   }
 
+  let modalCollegesPromise = null;
+  window.handleModalSearchInput = async function(event) {
+    const input = event.target.value.toLowerCase().trim();
+    const suggestionsContainer = document.getElementById('modal-suggestions');
+
+    if (input.length < 2) {
+      suggestionsContainer.innerHTML = '';
+      return;
+    }
+
+    if (!modalCollegesPromise) {
+      modalCollegesPromise = (async () => {
+        try {
+          const { collection, getDocs } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
+          const querySnapshot = await getDocs(collection(db, "colleges"));
+          let cache = [];
+          querySnapshot.forEach((doc) => {
+            cache.push({ id: doc.id, name: doc.data().name || doc.id });
+          });
+          return cache;
+        } catch (err) {
+          console.error("Error fetching", err);
+          return [];
+        }
+      })();
+    }
+
+    const cache = await modalCollegesPromise;
+    const filtered = cache.filter(c => c.name.toLowerCase().includes(input)).slice(0, 5);
+
+    if (filtered.length > 0) {
+      suggestionsContainer.innerHTML = filtered.map(c => 
+        `<div onclick="window.location.href='testing.html?key=${encodeURIComponent(c.name)}'" class="p-4 border-b border-gray-200 hover:bg-black hover:text-white cursor-pointer font-bold uppercase transition-colors md:text-xl">
+          ${c.name}
+         </div>`
+      ).join('');
+    } else {
+      suggestionsContainer.innerHTML = `<div class="p-4 font-bold uppercase text-muted md:text-xl">No colleges found</div>`;
+    }
+  }
+
+  window.handleModalKeyPress = async function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const input = document.getElementById('modal-search').value.toLowerCase().trim();
+      if (!input) return;
+
+      if (modalCollegesPromise) {
+        const cache = await modalCollegesPromise;
+        const filtered = cache.filter(c => c.name.toLowerCase().includes(input));
+        if (filtered.length > 0) {
+          window.location.href = `testing.html?key=${encodeURIComponent(filtered[0].name)}`;
+          return;
+        }
+      }
+      window.location.href = `testing.html?key=${encodeURIComponent(input)}`;
+    }
+  }
+
+  window.selectSuggestion = function(name) {
+    document.getElementById('search').value = name;
+    window.location.href = `testing.html?key=${encodeURIComponent(name)}`;
+  }
+
   window.handleKeyPress = function(event) {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -179,11 +243,6 @@
     } else {
       suggestionsContainer.innerHTML = `<div class="p-4 font-bold uppercase text-muted md:text-xl">No colleges found</div>`;
     }
-  }
-
-  window.selectSuggestion = function(name) {
-    document.getElementById('search').value = name;
-    window.location.href = `testing.html?key=${encodeURIComponent(name)}`;
   }
 
   async function searchColleges() {
@@ -276,7 +335,11 @@
 
   function renderSearchedCollege(collegeData, collegeId) {
     const collegeDetails = document.getElementById("collegeDetails");
-    const safeArray = (val) => Array.isArray(val) ? val : (val ? Object.values(val) : []);
+    const safeArray = (val) => {
+      if (Array.isArray(val)) return val;
+      if (val && typeof val === 'object') return Object.values(val);
+      return [];
+    };
     const cutoffsList = safeArray(collegeData.cutoffs);
     const galleryList = safeArray(collegeData.gallery);
     const facultyList = safeArray(collegeData.faculty);
