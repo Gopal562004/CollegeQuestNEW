@@ -359,6 +359,17 @@
         <div class="text-xs font-bold uppercase tracking-widest text-gray-500">© 2024</div>
       </footer>
     `;
+    const loginBtn = document.getElementById('nav-login-btn');
+    if (loginBtn) {
+      if (currentUser) {
+        loginBtn.innerText = "Profile";
+        loginBtn.onclick = () => window.location.href = "profile.html";
+      } else {
+        loginBtn.innerText = "Login";
+        loginBtn.onclick = () => window.location.href = "index.html";
+      }
+    }
+
     initializeChart(collegeData);
     
     const saveBtn = document.getElementById("save-wishlist-btn");
