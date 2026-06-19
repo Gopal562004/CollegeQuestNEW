@@ -294,8 +294,10 @@
         class="w-full border-b-hard text-4xl md:text-6xl font-black uppercase focus:outline-none focus:border-b-4 placeholder-gray-300 pb-4" 
         placeholder="ENTER COLLEGE..."
         onkeypress="handleKeyPress(event)"
+        oninput="handleSearchInputEvent(event)"
         autocomplete="off"
       >
+      <div id="search-suggestions-list" class="mt-4 flex flex-col border-hard bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] empty:border-none empty:shadow-none transition-all"></div>
       <p class="mt-8 font-bold text-muted uppercase tracking-widest text-sm">Suggestions: St. John, Vidyavardhini, Mumbai University</p>
     </div>
   </div>
@@ -370,6 +372,49 @@
         window.location.href = `testing.html?key=${encodeURIComponent(searchTerm)}`;
       }
     }
+  }
+
+  let allCollegesCache = [];
+  window.handleSearchInputEvent = async function(event) {
+    const input = event.target.value.toLowerCase().trim();
+    const suggestionsContainer = document.getElementById('search-suggestions-list');
+
+    if (input.length < 2) {
+      suggestionsContainer.innerHTML = '';
+      return;
+    }
+
+    if (allCollegesCache.length === 0) {
+      try {
+        const { collection, getDocs } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
+        const querySnapshot = await getDocs(collection(db, "colleges"));
+        querySnapshot.forEach((doc) => {
+          allCollegesCache.push({
+            id: doc.id,
+            name: doc.data().name || doc.id
+          });
+        });
+      } catch (err) {
+        console.error("Error fetching suggestions", err);
+      }
+    }
+
+    const filtered = allCollegesCache.filter(c => c.name.toLowerCase().includes(input)).slice(0, 5);
+
+    if (filtered.length > 0) {
+      suggestionsContainer.innerHTML = filtered.map(c => 
+        `<div onclick="selectSuggestion('${c.name.replace(/'/g, "\\'")}')" class="p-4 border-b border-gray-200 hover:bg-black hover:text-white cursor-pointer font-bold uppercase transition-colors md:text-xl">
+          ${c.name}
+         </div>`
+      ).join('');
+    } else {
+      suggestionsContainer.innerHTML = `<div class="p-4 font-bold uppercase text-muted md:text-xl">No colleges found</div>`;
+    }
+  }
+
+  window.selectSuggestion = function(name) {
+    document.getElementById('search').value = name;
+    window.location.href = `testing.html?key=${encodeURIComponent(name)}`;
   }
 
   const authForm = document.getElementById('auth-form');
