@@ -374,7 +374,7 @@
     }
   }
 
-  let allCollegesCache = [];
+  let collegesPromise = null;
   window.handleSearchInputEvent = async function(event) {
     const input = event.target.value.toLowerCase().trim();
     const suggestionsContainer = document.getElementById('search-suggestions-list');
@@ -384,22 +384,28 @@
       return;
     }
 
-    if (allCollegesCache.length === 0) {
-      try {
-        const { collection, getDocs } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
-        const querySnapshot = await getDocs(collection(db, "colleges"));
-        querySnapshot.forEach((doc) => {
-          allCollegesCache.push({
-            id: doc.id,
-            name: doc.data().name || doc.id
+    if (!collegesPromise) {
+      collegesPromise = (async () => {
+        try {
+          const { collection, getDocs } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
+          const querySnapshot = await getDocs(collection(db, "colleges"));
+          let cache = [];
+          querySnapshot.forEach((doc) => {
+            cache.push({
+              id: doc.id,
+              name: doc.data().name || doc.id
+            });
           });
-        });
-      } catch (err) {
-        console.error("Error fetching suggestions", err);
-      }
+          return cache;
+        } catch (err) {
+          console.error("Error fetching suggestions", err);
+          return [];
+        }
+      })();
     }
 
-    const filtered = allCollegesCache.filter(c => c.name.toLowerCase().includes(input)).slice(0, 5);
+    const cache = await collegesPromise;
+    const filtered = cache.filter(c => c.name.toLowerCase().includes(input)).slice(0, 5);
 
     if (filtered.length > 0) {
       suggestionsContainer.innerHTML = filtered.map(c => 
